@@ -66,6 +66,16 @@ body {
   font-size: 100px;
 
 }
+
+.title-server{
+  font-size: 60px;
+
+}
+.subtitle-server{
+  font-size: 40px;
+
+}
+
 .subtitle{
   font-size: 60px;
 
@@ -97,9 +107,10 @@ body {
 }
 
 .btn-continuar{
-  width: 200px;
-  font-size: 30px;
+  width: 300px;
+  font-size: 40px;
   border-radius: 10px;
+  margin-top: 30px;
   
 }
 .btum{
@@ -110,11 +121,16 @@ body {
 
 }
 .buton-server{
-  width: 300px;
+  width: 600px;
   font-size: 35px;
 
 }
 body {
   overflow: hidden; /* Desactiva el desplazamiento */
 }
-/* Fin de los estilos de vistas de users */
+
+.bton-solic{
+  width: 300px;
+  font-size: 35px;
+
+}
