@@ -1,0 +1,104 @@
+@{
+    ViewData["Title"] = "Panel agente";
+}
+
+<div class="row">
+    <div class="col-7 d-flex align-items-center" style="height: 75vh;">
+        <div class="card shadow-sm col-12">
+            <div class="card-header bg-dark text-white text-center">
+                Información del usuario
+            </div>
+            <div class="card-body shadow-sm">
+                <form method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" aria-describedby="Nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" aria-describedby="Apellidos">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Documento</label>
+                        <input type="text" class="form-control" aria-describedby="Documento de identidad">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">EPS</label>
+                        <input type="text" class="form-control" aria-describedby="EPS">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <label class="form-label">Turno</label>
+                            <input type="text" class="form-control" aria-describedby="Turno">
+                        </div>
+                        <div class="col-9">
+                            <label class="form-label">Servicio</label>
+                            <input type="text" class="form-control" aria-describedby="Servicio">
+                        </div>
+                    </div>
+                    <div class="mt-4 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div>
+                    @* -------------------- disabled -------------------- *@
+                    @* <div class="mb-3">
+                        <label class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" aria-describedby="Nombre" value="###" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" aria-describedby="Apellidos" value="###" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Documento</label>
+                        <input type="text" class="form-control" aria-describedby="Documento de identidad" value="###" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">EPS</label>
+                        <input type="text" class="form-control" aria-describedby="EPS" value="###" disabled>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <label class="form-label">Turno</label>
+                            <input type="text" class="form-control" aria-describedby="Turno" value="###" disabled>
+                        </div>
+                        <div class="col-9">
+                            <label class="form-label">Servicio</label>
+                            <input type="text" class="form-control" aria-describedby="Servicio" value="###" disabled>
+                        </div>
+                    </div>
+                    <div class="mt-4 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div> *@
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-5 border shadow-sm" style="height: 75vh;">
+        <div class="row d-flex justify-content-center mt-5">
+            <div class="col-12 d-flex justify-content-center">
+                <a href="#" class="btn btn-primary mt-2 p-4">Siguiente turno</a>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center mt-5">
+            <div class="col-12 d-flex justify-content-center">
+                <a href="#" class="btn btn-warning mt-2 p-4">Turno ausente</a>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center mt-5">
+            <form class="text-center" method="post">
+                <div class="row d-flex justify-content-center mt-5">
+                    <div class="col-8">
+                        <select class="form-select">
+                            <option value="" selected disabled>Estado</option>
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                            <option value="Break">Break</option>
+                            <option value="Baño">Baño</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success" style="margin-top: 115px;">Confirmar</button>
+            </form>
+        </div>
+    </div>
+</div>
