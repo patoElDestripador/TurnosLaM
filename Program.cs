@@ -8,7 +8,6 @@ builder.Services.AddDbContext<BaseContext>(options => options.UseMySql(builder.C
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(180);
-    
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
