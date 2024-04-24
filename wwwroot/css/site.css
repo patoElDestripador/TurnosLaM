@@ -19,7 +19,24 @@ html {
   position: relative;
   min-height: 100%;
 }
-
-body {
-  margin-bottom: 60px;
+.Containerbtn{
+  display: flex;
+  justify-content: center;
 }
+
+.botones{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 150px;
+  gap: 12px;
+  width: 150px;
+}
+.link{
+  margin-top: 100px;
+  display: flex;
+  justify-content: end;
+}
+/* body {
+  margin-bottom: 60px;
+} */

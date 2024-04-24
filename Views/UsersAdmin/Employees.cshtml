@@ -1,0 +1,33 @@
+@{
+    ViewBag.Title ="Empleados";
+}
+<div class="containerEmployees">
+    <div class="title d-flex justify-content-center">
+        <h1>Empleados</h1>
+    </div>
+    <div class="table">
+        <table  class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Email</th>
+                    <th>Número de telefono</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* foreach (var Employee in Model){
+                    <tr>
+                        <td>@Employee.Id</td>
+                        <td>@Employee.FirstName</td>
+                        <td>@Employee.LastName</td>
+                        <td>@Employee.Email</td>
+                        <td>@Employee.PhoneNumber</td>
+                        <td>@Employee.Status</td>
+                } *@
+            </tbody>
+        </table>
+    </div>
+</div>

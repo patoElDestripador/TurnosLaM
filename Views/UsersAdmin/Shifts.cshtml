@@ -1,0 +1,33 @@
+@{
+    ViewBag.title = "Turnos";
+}
+<div class="container-fluid">
+    <div class="title d-flex justify-content-center">
+        <h1>Turnos</h1>
+    </div>
+    <div class="table">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Paciente Id</th>
+                    <th>Servicio Id</th>
+                    <th>Fecha de creación</th>
+                    <th>Turnos</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+            @* foreach (var Shifts in Model){
+                <tr>
+                    <td>@Shift.Id</td>
+                    <td>@Shift.PatientId</td>
+                    <td>@Shift.Service.Id</td>
+                    <td>@Shift.CreationDate</td>
+                    <td>@Shift.Shift</td>
+                    <td>@Shift.Status</td>
+            } *@
+            </tbody>
+        </table>
+    </div>
+</div>
