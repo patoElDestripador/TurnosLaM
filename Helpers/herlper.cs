@@ -22,7 +22,7 @@ namespace TurnosLaM.Helpers
             _httpContextAccessor = httpContextAccessor;
         }
 
-       public static string GenerateUserName(string FirstName, string LastName, string Document)
+        public static string GenerateUserName(string FirstName, string LastName, string Document)
         {
             string cleanFirstName = FirstName.Trim().ToLower();
             string cleanLastName = LastName.Trim().ToLower();
@@ -49,7 +49,7 @@ namespace TurnosLaM.Helpers
         }
 
         public T getObjInSession<T>(string name){ 
-           return JsonConvert.DeserializeObject<T>(_httpContextAccessor.HttpContext.Session.GetString(name));
+            return JsonConvert.DeserializeObject<T>(_httpContextAccessor.HttpContext.Session.GetString(name));
         }
     }
 }
