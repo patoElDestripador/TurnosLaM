@@ -1,4 +1,4 @@
--- Active: 1713899042493@@bnaeksshtlfrlbvcc3k7-mysql.services.clever-cloud.com@3306@bnaeksshtlfrlbvcc3k7
+-- Active: 1713988701216@@bnaeksshtlfrlbvcc3k7-mysql.services.clever-cloud.com@3306@bnaeksshtlfrlbvcc3k7
 
 CREATE TABLE Employees (
     Id INT PRIMARY KEY AUTO_INCREMENT,
@@ -169,3 +169,13 @@ LIMIT 1;
 Select * FROM ViewQueuesStatus;
 
 Select * FROM ViewServiceDemanded;
+
+
+
+CREATE VIEW ViewNextShift AS;
+
+SELECT * FROM Queues q
+WHERE
+    q.Status = 'En espera'
+GROUP BY
+    q.UserId

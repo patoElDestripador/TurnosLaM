@@ -15,14 +15,21 @@
 </head>
 
 <body>
-    <header class="py-3 mb-3 border-bottom">
-        <div class="container-fluid d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
-            <h3 class="justify-content-start "><a class="text-decoration-none text-dark" asp-controller="Home"
+    <header class="p-2 mb-3 border-bottom">
+        <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <h3 class="justify-content-start"><a class="text-decoration-none text-dark" asp-controller="Home"
                     asp-action="Index">TurnosLaM</a></h3>
-            <div class="d-flex justify-content-end align-items-end ">
-                @if (ViewData["Title"] != "Login" && ViewData["Title"] != "Error" && ViewData["Title"] !=
-                "unauthorized")
-                {
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#" class="nav-link px-2 text-secondary">Turnos</a></li>
+            <li><a href="#" class="nav-link px-2 text-secondary">Empleados</a></li>
+            <li><a href="#" class="nav-link px-2 text-secondary">Cola</a></li>
+            <li><a href="#" class="nav-link px-2 text-secondary">Crear Turno</a></li>
+            </ul>
+
+
+            <div class="dropdown text-end">
                     <div class="flex-shrink-1 dropdown">
                         <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -37,7 +44,6 @@
                                     out</a></li>
                         </ul>
                     </div>
-                }
             </div>
         </div>
         </div>
