@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+@{
+    Layout=null;
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TurnosLaM</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TurnosLaM.styles.css" asp-append-version="true" />
+    <link rel="shortcut icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSI4Ljc1IiB2aWV3Qm94PSIwIDAgMTAyNCA4OTYiPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik01NzAgMzg0aDM4cTEzIDAgMjIuNSA5LjVUNjQwIDQxNnQtOS41IDIyLjVUNjA4IDQ0OGgtMzhxLTEwIDI4LTM0LjUgNDZUNDgwIDUxMnEtNDAgMC02OC0yOHQtMjgtNjh0MjgtNjh0NjgtMjhxMzEgMCA1NS41IDE4dDM0LjUgNDZtNDIyIDY0aC0zNHEtOSAxMDEtNzEuNSAxODYuNVQ3MjUgNzcydC0yMTMgNTl2MzNxMCAxMy05LjUgMjIuNVQ0ODAgODk2dC0yMi41LTkuNVQ0NDggODY0di05OHEtMTA2LTgtMTkyLTU5di03NnE5NyA3MyAyMjQgNzNxNzQgMCAxMzctMTUuNXQxMTEuNS00NnQ3Ni04MC41VDgzMiA0NDhxMC04Ny00Ny0xNjAuNVQ2NTcgMTcxdC0xNzctNDN0LTE3NyA0M3QtMTI4IDExNi41VDEyOCA0NDhIMzJxLTEzIDAtMjIuNS05LjVUMCA0MTZ0OS41LTIyLjVUMzIgMzg0aDM4cTE4LTk4IDg1LTE3NS41VDMyMCA5NFY0MVE0MTIgMCA1MTIgMHExMTYgMCAyMTUuNSA1MXQxNjEgMTM5VDk1OCAzODRoMzRxMTMgMCAyMi41IDkuNXQ5LjUgMjIuNXQtOS41IDIyLjVUOTkyIDQ0OCIvPjwvc3ZnPg==" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Play&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-center">
+                <div class=" justify-content-center">
+                    <div class="d-flex justify-content-center" >
+                        <h5 class="margin-index title ">Bienvenido</h5>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <p class="subtitle">Aqui podrás solicitar tu turno</p>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="/Turnos/Create" class="btn bton btn-primary">Solicitar Turno</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
