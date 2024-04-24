@@ -3,23 +3,6 @@ using TurnosLaM.Filters;
 using Microsoft.AspNetCore.Mvc;
 using TurnosLaM.Models;
 
-namespace TurnosLaM.Controllers;
-//[TheGuardcito]
-public class UsersController : Controller
-{
-
-    public IActionResult ShiftQueue()
-    {
-        return View();
-    }
-
-}
-using System.Diagnostics;
-using TurnosLaM.Filters;
-using Microsoft.AspNetCore.Mvc;
-using TurnosLaM.Models;
-
-
 
 namespace TurnosLaM.Controllers{
     public class UsersController : Controller{
@@ -33,6 +16,10 @@ namespace TurnosLaM.Controllers{
         return View();
     }
     public IActionResult Servicios()
+    {
+        return View();
+    }
+        public IActionResult ShiftQueue()
     {
         return View();
     }

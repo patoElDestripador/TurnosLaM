@@ -5,9 +5,6 @@ html {
   font-style: normal;
 }
 
-body{
-  overflow: hidden;
-}
 
 @media (min-width: 768px) {
   html {
@@ -15,9 +12,8 @@ body{
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
+
+/* inicio de los estilos de vistas de users Admin*/
 
 .Containerbtn{
   display: flex;
@@ -37,10 +33,22 @@ body{
   display: flex;
   justify-content: end;
 }
-/* body {
+
+/* fin de los estilos de vistas de users Admin*/
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
   margin-bottom: 60px;
 }
-*/
+
 
 
 
@@ -106,18 +114,7 @@ body{
   font-size: 35px;
 
 }
-
-.image-container {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+body {
+  overflow: hidden; /* Desactiva el desplazamiento */
 }
-
-.image-container img {
-  width: 100%;
-  height: 80vh;
-  object-fit: cover;
-}
-.dacontainer{
-  height: 98vh;
-}
+/* Fin de los estilos de vistas de users */
