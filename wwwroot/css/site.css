@@ -39,4 +39,73 @@ html {
 }
 /* body {
   margin-bottom: 60px;
-} */
+}
+*/
+
+
+
+.margin-index{
+  margin-top: 200px;
+}
+
+.margin-server{
+  margin-top: 50px;
+
+}
+
+/* inicio de los estilos de vistas de users */
+.title{
+  font-size: 100px;
+
+}
+.subtitle{
+  font-size: 60px;
+
+}
+.bton{
+  width: 200px;
+}
+
+.bton-tecla{
+  width: 100px;
+  height: 60px;
+  border-radius: 16px;
+  margin: 10px;
+  font-size: 30px;
+
+
+}
+.btn-0{
+  margin: 10px;
+  margin-left: 10px;
+  width: 220px;
+  height: 60px;
+  border-radius: 10px;
+  font-size: 30px;
+
+}
+.card-tecla{
+  border-radius: 10px;
+}
+
+.btn-continuar{
+  width: 200px;
+  font-size: 30px;
+  border-radius: 10px;
+  
+}
+.btum{
+  width: 200px;
+  
+}
+.margin-server{
+
+}
+.buton-server{
+  width: 300px;
+  font-size: 35px;
+
+}
+body {
+  overflow: hidden; /* Desactiva el desplazamiento */
+}
