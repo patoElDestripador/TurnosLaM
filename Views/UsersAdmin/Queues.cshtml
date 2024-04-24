@@ -1,0 +1,40 @@
+@{
+    ViewBag.title ="Colas";
+}
+<div class="containerQueues">
+    <div class="title d-flex justify-content-center">
+        <h1>Colas</h1>
+    </div>
+    <div class="table">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>User Id</th>
+                    <th>Turno Id</th>
+                    <th>Estado</th>
+                    <th>Turno asignado</th>
+                    <th>Fecha de creación</th>
+                    <th>Tiempo de asignación</th>
+                    <th>Hora de cierre</th>
+                    <th>Llamadas</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* foreach(var Queues in Model){
+                    <tr>
+                        <td>@Queues.Id</td>
+                        <td>@Queues.UserId</td>
+                        <td>@Queues.ShiftId</td>
+                        <td>@Queues.Status</td>
+                        <td>@Queues.AssignedShift</td>
+                        <td>@Queues.CreationDate</td>
+                        <td>@Queues.AssignmetTime</td>
+                        <td>@Queues.ClosingTime</td>
+                        <td>@Queues.Class</td>
+                    </tr>
+                } *@
+            </tbody>
+        </table>
+    </div>
+</div>

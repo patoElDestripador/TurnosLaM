@@ -10,6 +10,7 @@ namespace TurnosLaM.Data
         public BaseContext(DbContextOptions<BaseContext> options) : base(options)
         { }
 
+        public object UsersAdmin { get; internal set; }
     }
 
 }
