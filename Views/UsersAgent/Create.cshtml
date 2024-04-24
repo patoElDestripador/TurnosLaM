@@ -1,0 +1,42 @@
+@{
+    ViewData["Title"] = "Registrar Empleado";
+}
+
+<div class="row d-flex align-items-center" style="height: 75vh;">
+    <div class="col-12">
+        <div class="card shadow-sm col-12">
+            <div class="card-header bg-dark text-white text-center">
+                Registrar nuevo empleado
+            </div>
+            <div class="card-body shadow-sm">
+                <form method="post">
+                    <div class="row mb-3 d-flex justify-content-center">
+                        <div class="col-5">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" aria-describedby="Nombre">
+                            <label class="form-label mt-3">Email</label>
+                            <input type="email" class="form-control" aria-describedby="Email">
+                            <select class="form-select mt-5">
+                                <option value="" selected disabled>Género</option>
+                                <option value="male">Hombre</option>
+                                <option value="female">Mujer</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+                        <div class="col-5">
+                            <label class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" aria-describedby="Apellidos">
+                            <label class="form-label mt-3">Contraseña</label>
+                            <input type="password" class="form-control" aria-describedby="Contraseña">
+                            <label class="form-label mt-3">Ciudad</label>
+                            <input type="text" class="form-control" aria-describedby="Ciudad">
+                        </div>
+                    </div>
+                    <div class="mt-4 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary mt-5">Registrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
