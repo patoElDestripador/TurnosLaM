@@ -1,6 +1,36 @@
+@using TurnosLaM.Models;
+@model Queue; 
+
 @{
     ViewData["Title"] = "Panel agente";
 }
+
+@{string? estado = Model.Status;}
+ @if(Model != null && estado == "En espera")
+
+        {
+        <p>Estado actual: En espera</p>
+    }else if (estado == "Ausente")
+    {
+        <p>Estado actual: Ausente</p>
+    }
+    else
+    {
+        <button onclick="marcarLlamado('@Model.Id')">Llamado @((Model.Calls == 0) ? "Primer" : (Model.Calls == 1) ? "Segundo" : "Tercer" )</button>
+
+        @if (Model.Calls == 2 && (DateTime.Now - Model.StartTime).TotalSeconds < 20)
+        {
+            <p>Llamado Tercero</p>
+        }
+        else if (Model.Calls == 2)
+        {
+            <p>Estado actual: En espera (Contador)</p>
+        }
+    }
+            </div>
+
+
+
 
 <div class="row">
     <div class="col-7 d-flex align-items-center" style="height: 75vh;">
@@ -39,36 +69,6 @@
                     <div class="mt-4 d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary mt-2">Guardar</button>
                     </div>
-                    @* -------------------- disabled -------------------- *@
-                    @* <div class="mb-3">
-                        <label class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" aria-describedby="Nombre" value="###" disabled>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Apellidos</label>
-                        <input type="text" class="form-control" aria-describedby="Apellidos" value="###" disabled>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Documento</label>
-                        <input type="text" class="form-control" aria-describedby="Documento de identidad" value="###" disabled>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">EPS</label>
-                        <input type="text" class="form-control" aria-describedby="EPS" value="###" disabled>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-3">
-                            <label class="form-label">Turno</label>
-                            <input type="text" class="form-control" aria-describedby="Turno" value="###" disabled>
-                        </div>
-                        <div class="col-9">
-                            <label class="form-label">Servicio</label>
-                            <input type="text" class="form-control" aria-describedby="Servicio" value="###" disabled>
-                        </div>
-                    </div>
-                    <div class="mt-4 d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
-                    </div> *@
                 </form>
             </div>
         </div>
@@ -81,7 +81,7 @@
         </div>
         <div class="row d-flex justify-content-center mt-5">
             <div class="col-12 d-flex justify-content-center">
-                <a href="#" class="btn btn-warning mt-2 p-4">Turno ausente</a>
+
             </div>
         </div>
         <div class="row d-flex justify-content-center mt-5">
@@ -102,3 +102,20 @@
         </div>
     </div>
 </div>
+
+@if (Model.Calls == 2 && (DateTime.Now - Model.StartTime).TotalSeconds < 20)
+{
+    <script>
+        var secondsLeft = Math.ceil(20 - (@(DateTime.Now - Model.StartTime).TotalSeconds));
+        var timer = setInterval(function() {
+            secondsLeft--;
+            if (secondsLeft <= 0) {
+                clearInterval(timer);
+                document.getElementById('status').innerText = 'Ausente';
+                document.getElementById('siguiente').style.display = 'block'; // Muestra el botón "Siguiente paciente"
+            } else {
+                document.getElementById('timer').innerText = secondsLeft + ' segundos';
+            }
+        }, 1000);
+    </script>
+}

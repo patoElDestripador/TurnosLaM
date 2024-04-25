@@ -85,3 +85,5 @@ function sendRequestToController(Controller,method,methodType = "GET",params = "
   };
   xhr.send();
 }
+
+
