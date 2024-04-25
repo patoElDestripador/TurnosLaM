@@ -14,48 +14,63 @@ namespace TurnosLaM.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    public readonly BaseContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, BaseContext context)
     {
         _logger = logger;
+        _context = context;
     }
-
     public IActionResult Index(string message = "")
     {
         ViewBag.Message = message;
         return View();
     }
 
-    public IActionResult Privacy()
+    public async Task<IActionResult> Privacy()
     {
         return View();
     }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-
-    public readonly BaseContext _context;
-    public HomeController(BaseContext context)
-    {
-        _context = context;
-    }
     // ----------------- LOGIN ACTION:
-//     [HttpPost]
-//     public async Task<IActionResult> SignIn(string userName, string password)
-//     {
-//         // Se busca el empleado en la base de datos:
-//         var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName && u.Password == password);
-
-//         // Se inicializa las variables de sesión necesarias:
-//         HttpContext.Session.SetString("UserId", user.Id.ToString());
-//         // HttpContext.Session.SetInt32("EmployeeId", user.EmployeesId);
-//         // HttpContext.Session.SetString("UserName", user.UserName);
-//         // HttpContext.Session.SetString("Password", user.Password);
-//         // HttpContext.Session.SetString("Role", user.Role);
-//         // HttpContext.Session.SetString("Module", user.Module);
-//         // HttpContext.Session.SetString("Status", user.Skills);
-//     }
+    
+    [HttpPost]
+    public async Task<IActionResult> SignIn(string userName, string password)
+    {
+        // Se confirma que los campos no estén vacíos:
+        if(!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
+        {
+            // Se busca el empleado en la base de datos:
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+            // Se confirma que se haya encontrado un usuario:
+            if(user != null)
+            {
+                // Se inicializa las variables de sesión necesarias:
+                HttpContext.Session.SetString("UserId", user.Id.ToString());
+                // Se confirma el rol del usuario:
+                if(user.Role == "Asesor")
+                {
+                    // Se redirecciona al panel de asesores:
+                    return RedirectToAction("Index", "UsersAgent");
+                }
+                else
+                {
+                    // Se redirecciona al panel de MSC:
+                    return RedirectToAction("Index", "UsersAdmin");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home", new {message = "¡Usuario no registrado!" });
+            }
+        }
+        else
+        {
+            return RedirectToAction("Index", "Home", new {message = "¡Llena los campos!"});
+        }
+    }
+    
 }

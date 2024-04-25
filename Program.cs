@@ -4,7 +4,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<BaseContext>(options => options.UseMySql(builder.Configuration.GetConnectionString("MiseryShifts"),Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.20-mysql")));
+builder.Services.AddDbContext<BaseContext>(options => options.UseMySql(builder.Configuration.GetConnectionString("MiseryShifts"),
+Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.20-mysql")));
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(180);

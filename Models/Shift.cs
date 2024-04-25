@@ -1,7 +1,9 @@
+using System.ComponentModel.DataAnnotations;
 namespace TurnosLaM.Models
 {
     public class ShiftModel
     {
+        [Key]
         public int Id { get;}
         public int PatientId { get; set; }  
         public int ServiceId { get; set; }  

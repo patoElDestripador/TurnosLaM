@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
 namespace TurnosLaM.Models
 {
     public class User
     {
-        public int Id { get; }
+        [Key]
+        public int Id { get; set;}
         public int EmployeesId { get; set; }
         public string? UserName { get; set; }
         public string? Password { get; set; }
