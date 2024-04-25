@@ -12,28 +12,65 @@
                 <form method="post">
                     <div class="row mb-3 d-flex justify-content-center">
                         <div class="col-5">
+                            @* Nombre *@
                             <label class="form-label">Nombre</label>
                             <input type="text" class="form-control" aria-describedby="Nombre">
+                            @* Email *@
                             <label class="form-label mt-3">Email</label>
                             <input type="email" class="form-control" aria-describedby="Email">
+                            @* Teléfono *@
+                            <label class="form-label mt-3">Teléfono</label>
+                            <input type="number" class="form-control" aria-describedby="Teléfono">
+                            @* Rol *@
                             <select class="form-select mt-5">
-                                <option value="" selected disabled>Género</option>
-                                <option value="male">Hombre</option>
-                                <option value="female">Mujer</option>
-                                <option value="other">Otro</option>
+                                <option value="" selected disabled>Rol</option>
+                                <option value="asesor">Asesor</option>
+                                <option value="msc">MSC</option>
                             </select>
+                            @* Skills *@
+                            <label class="form-label mt-4">Skills:</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="CM">
+                                <label class="form-check-label" for="opcion1">Citas médicas</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="PF">
+                                <label class="form-check-label" for="opcion2">Pago de facturas</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="AM">
+                                <label class="form-check-label" for="opcion3">Medicamentos</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="INF">
+                                <label class="form-check-label" for="opcion3">Información general</label>
+                            </div>
                         </div>
                         <div class="col-5">
+                            @* Apellidos *@
                             <label class="form-label">Apellidos</label>
                             <input type="text" class="form-control" aria-describedby="Apellidos">
+                            @* Contraseña *@
                             <label class="form-label mt-3">Contraseña</label>
                             <input type="password" class="form-control" aria-describedby="Contraseña">
-                            <label class="form-label mt-3">Ciudad</label>
-                            <input type="text" class="form-control" aria-describedby="Ciudad">
+                            @* Género *@
+                            <select class="form-select mt-5">
+                                <option value="" selected disabled>Género</option>
+                                <option value="male">Masculino</option>
+                                <option value="female">Femenino</option>
+                                <option value="other">Otro</option>
+                            </select>
+                            @* Estado actual *@
+                            <select class="form-select mt-5">
+                                <option value="" selected disabled>Estado actual</option>
+                                <option value="activo">Activo</option>
+                                <option value="inactivo">Inactivo</option>
+                                <option value="vacaciones">Vacaciones</option>
+                            </select>
                         </div>
                     </div>
                     <div class="mt-4 d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary mt-5">Registrar</button>
+                        <button type="submit" class="btn btn-primary mt-5 p-3">Registrar</button>
                     </div>
                 </form>
             </div>
