@@ -3,7 +3,6 @@ namespace TurnosLaM.Models
 {
     public class User
     {
-        [Key]
         public int Id { get; set;}
         public int EmployeesId { get; set; }
         public string? UserName { get; set; }

@@ -7,6 +7,8 @@ using TurnosLaM.Models;
 using TurnosLaM.Helpers;
 using Newtonsoft.Json;
 using BCryptNet = BCrypt.Net.BCrypt;
+using System;
+
 
 
 
@@ -55,6 +57,9 @@ namespace TurnosLaM.Helpers
         public T getObjInSession<T>(string name){ 
             return JsonConvert.DeserializeObject<T>(_httpContextAccessor.HttpContext.Session.GetString(name));
         }
+
+
+
     }
 }
 

@@ -10,5 +10,6 @@ namespace TurnosLaM.Models
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Status { get; set; }
+        public DateTime CreationTime { get; set; }
     }
 }
