@@ -14,19 +14,18 @@
                     <th>Servicio Id</th>
                     <th>Fecha de creación</th>
                     <th>Turnos</th>
-                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
-            @* foreach (var Shifts in Model){
+            @foreach (var ShiftModel in Model){
                 <tr>
-                    <td>@Shift.Id</td>
-                    <td>@Shift.PatientId</td>
-                    <td>@Shift.Service.Id</td>
-                    <td>@Shift.CreationDate</td>
-                    <td>@Shift.Shift</td>
-                    <td>@Shift.Status</td>
-            } *@
+                    <td>@ShiftModel.Id</td>
+                    <td>@ShiftModel.PatientId</td>
+                    <td>@ShiftModel.Service.Id</td>
+                    <td>@ShiftModel.CreationDate</td>
+                    <td>@ShiftModel.Shift</td>
+                </tr>
+            }
             </tbody>
         </table>
     </div>

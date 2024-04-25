@@ -18,7 +18,7 @@
                 </tr>
             </thead>
             <tbody>
-                @* foreach (var Employee in Model){
+                @foreach (var Employee in Model){
                     <tr>
                         <td>@Employee.Id</td>
                         <td>@Employee.FirstName</td>
@@ -26,7 +26,8 @@
                         <td>@Employee.Email</td>
                         <td>@Employee.PhoneNumber</td>
                         <td>@Employee.Status</td>
-                } *@
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

@@ -21,19 +21,19 @@
                 </tr>
             </thead>
             <tbody>
-                @* foreach(var Queues in Model){
+                @foreach(var Queue in Model){
                     <tr>
-                        <td>@Queues.Id</td>
-                        <td>@Queues.UserId</td>
-                        <td>@Queues.ShiftId</td>
-                        <td>@Queues.Status</td>
-                        <td>@Queues.AssignedShift</td>
-                        <td>@Queues.CreationDate</td>
-                        <td>@Queues.AssignmetTime</td>
-                        <td>@Queues.ClosingTime</td>
-                        <td>@Queues.Class</td>
+                        <td>@Queue.Id</td>
+                        <td>@Queue.UserId</td>
+                        <td>@Queue.ShiftId</td>
+                        <td>@Queue.Status</td>
+                        <td>@Queue.AssignedShift</td>
+                        <td>@Queue.CreationDate</td>
+                        <td>@Queue.AssignmetTime</td>
+                        <td>@Queue.ClosingTime</td>
+                        <td>@Queue.Class</td>
                     </tr>
-                } *@
+                }
             </tbody>
         </table>
     </div>

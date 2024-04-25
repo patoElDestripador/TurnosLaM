@@ -11,6 +11,7 @@ namespace TurnosLaM.Data
         { }
 
         public object UsersAdmin { get; internal set; }
+        public DbSet<User> Users { get; set; }
     }
 
 }

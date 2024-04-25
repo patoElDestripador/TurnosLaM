@@ -25,7 +25,7 @@ function hola() {
       });
 
 }
-
+//Funcion de boton Continuar
 function shiftNotifier(ShiftNumber) {
   Swal.fire({
     title: `Turno ${ShiftNumber}`,
@@ -33,6 +33,7 @@ function shiftNotifier(ShiftNumber) {
     icon: "success"
   });
 }
+//Fin de Boton de continuar
 
 function documentNotFound(Document) {
   const swalWithBootstrapButtons = Swal.mixin({
