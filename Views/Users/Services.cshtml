@@ -30,14 +30,13 @@
             </p>
         </div>
         <div class="d-flex justify-content-center ">
-            <button type="button" class="btn btn-outline-primary m-5 buton-server"> Información general</button>
+            <a type="button" class="btn btn-outline-primary m-5 buton-server" asp-controller="Queues" asp-action="AssignShift" asp-route-serviceName="Información general">Información general</a>
             
-            <button type="button" class="btn btn-outline-primary m-5 buton-server">Autorización de medicamentos</button>
+            <a type="button" class="btn btn-outline-primary m-5 buton-server" asp-controller="Queues" asp-action="AssignShift" asp-route-serviceName="Autorización de medicamentos">Autorización de medicamentos</a>
         </div>
         <div class="d-flex justify-content-center ">
-            <button type="button" class="btn btn-outline-primary  m-5 buton-server">Pago de facturas</button>
-             <button type="button" class="btn btn-outline-primary m-5 buton-server">Citas Médicas</button>
-            
+            <a type="button" class="btn btn-outline-primary  m-5 buton-server" asp-controller="Queues" asp-action="AssignShift" asp-route-serviceName="Pago de facturas">Pago de facturas</a>
+            <a type="button" class="btn btn-outline-primary m-5 buton-server" asp-controller="Queues" asp-action="AssignShift" asp-route-serviceName="Solicitud de medicamentos">Solicitud de medicamentos</a>
         </div>
     </div>
                 <div class="d-flex justify-content-center">

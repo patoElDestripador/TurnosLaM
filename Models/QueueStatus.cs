@@ -2,13 +2,13 @@ namespace TurnosLaM.Models
 {
     public class QueueStatus
     {
-        public int QueueId { get;}
-        public int UserId { get;}
-        public int EmployeeId { get;}
-        public string? FirstName { get;}
-        public string? LastName { get;}
-        public int PendingShifts { get;}
-        public string? UserStatus { get;}
-        public string? Skills { get;}
+        public int QueueId {get; set;}
+        public int UserId { get; set;}
+        public int EmployeeId { get; set;}
+        public string? FirstName { get; set;}
+        public string? LastName { get; set;}
+        public int PendingShifts { get; set;}
+        public string? UserStatus { get; set;}
+        public string? Skills { get; set;}
     }
 }
