@@ -6,6 +6,7 @@ using TurnosLaM.Data;
 using TurnosLaM.Models;
 using TurnosLaM.Helpers;
 using Newtonsoft.Json;
+using System;
 
 
 
@@ -51,6 +52,9 @@ namespace TurnosLaM.Helpers
         public T getObjInSession<T>(string name){ 
            return JsonConvert.DeserializeObject<T>(_httpContextAccessor.HttpContext.Session.GetString(name));
         }
+
+
+
     }
 }
 

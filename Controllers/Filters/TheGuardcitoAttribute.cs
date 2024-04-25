@@ -16,7 +16,7 @@ namespace TurnosLaM.Filters
                 }
                 else
                 {
-                    context.Result = new RedirectResult("~/Home/Unauthorized");
+                    context.Result = new RedirectResult("~/Home/");
                 }
         }
     }

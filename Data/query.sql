@@ -1,4 +1,5 @@
--- Active: 1713988701216@@bnaeksshtlfrlbvcc3k7-mysql.services.clever-cloud.com@3306@bnaeksshtlfrlbvcc3k7
+-- SQLBook: Code
+-- Active: 1713899042493@@bnaeksshtlfrlbvcc3k7-mysql.services.clever-cloud.com@3306@bnaeksshtlfrlbvcc3k7
 
 CREATE TABLE Employees (
     Id INT PRIMARY KEY AUTO_INCREMENT,
@@ -34,7 +35,7 @@ CREATE TABLE Patients (
 
 CREATE TABLE Services (
     Id INT PRIMARY KEY AUTO_INCREMENT,
-    ServiceType VARCHAR(45) NOT NULL,
+    ServiceName VARCHAR(45) NOT NULL,
     Status ENUM('Enabled', 'Disabled')
 );
 
@@ -43,14 +44,13 @@ CREATE TABLE Shifts (
     PatientId INT NOT NULL,
     ServiceId INT NOT NULL,
     CreationDate DATETIME,
-    Shift INT,
     FOREIGN KEY (PatientId) REFERENCES Patients(Id) ON DELETE CASCADE,
     FOREIGN KEY (ServiceId) REFERENCES Services(Id) ON DELETE CASCADE
 );
 
 CREATE TABLE Queues (
     Id INT PRIMARY KEY AUTO_INCREMENT,
-    UserId INT NOT NULL,
+    UserId INT ,
     ShiftId INT NOT NULL,
     Status ENUM('Atendida', 'En espera', 'En progreso','Ausente','Por reasinar'),
     AssignedShift VARCHAR(45),
@@ -60,6 +60,13 @@ CREATE TABLE Queues (
     Calls INT,
     FOREIGN KEY (UserId) REFERENCES Users(Id) ON DELETE CASCADE,
     FOREIGN KEY (ShiftId) REFERENCES Shifts(Id) ON DELETE CASCADE
+);
+
+CREATE TABLE DailyCounters   (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    Day DATETIME NOT NULL,
+    ServiceName Varchar(4) NOT NULL,
+    Counter INT NOT NULL
 );
 
 
@@ -74,14 +81,14 @@ INSERT INTO Employees (FirstName, LastName, Email, PhoneNumber, Status) VALUES
 ('William', 'Taylor', 'william.taylor@example.com', '123-456-7890', 'Active');
 
 INSERT INTO Users (EmployeesId, UserName, Password, Role,Module, Status, Skills) VALUES
-(1, 'johndoe', 'password123', 'Asesor', 'A-01' ,'LogIn', 'Customer service'),
-(2, 'janesmith', 'password456', 'Mision Controller','A-01', 'LogIn', 'Management'),
-(3, 'alicejohnson', 'password789', 'Asesor','A-01', 'LogOut', 'Customer service'),
-(4, 'bobbrown', 'password000', 'Asesor', 'A-01','Break', 'Customer service'),
-(5, 'sarahmiller', 'password123', 'Asesor', 'A-01','LogIn', 'Customer service'),
-(6, 'michaelbrown', 'password456', 'Mision Controller','A-01', 'LogIn', 'Management'),
-(7, 'emmagarcia', 'password789', 'Asesor', 'A-01','LogOut', 'Customer service'),
-(8, 'williamtaylor', 'password000', 'Asesor', 'A-01','Break', 'Customer service');
+(1, '1', '1', 'Asesor', 'A-0' ,'LogIn', 'Autorización de medicamentos,Pago de facturas,Información general'),
+(2, 'janesmith', 'password456', 'Mision Controller','A-03', 'LogIn', 'Autorización de medicamentos,Pago de facturas,Información general'),
+(3, 'alicejohnson', 'password789', 'Asesor','A-04', 'LogIn', 'Autorización de medicamentos,Pago de facturas,Información general'),
+(4, 'bobbrown', 'password000', 'Asesor', 'A-05','LogOut', 'Pago de facturas,Información general'),
+(5, 'sarahmiller', 'password123', 'Asesor', 'A-06','LogIn', 'Información general'),
+(6, 'michaelbrown', 'password456', 'Mision Controller','A-07', 'LogOut', 'Autorización de medicamentos,Pago de facturas,Información general'),
+(7, 'emmagarcia', 'password789', 'Asesor', 'A-08','LogIn', 'Pago de facturas,Información general'),
+(8, 'williamtaylor', 'password000', 'Asesor', 'A-09','LogOut', 'Solicitud de medicamentos,Pago de facturas,Autorización de medicamentos');
 
 
 INSERT INTO Patients (Document,FirstName, LastName, Gender, Address,PhoneNumber,Eps) VALUES
@@ -92,8 +99,9 @@ INSERT INTO Patients (Document,FirstName, LastName, Gender, Address,PhoneNumber,
 ('100000005','James', 'Lee', 'Hombre', '654 Maple St', '333-333-585','Misery'),
 ('100000006','Sophia', 'Rodriguez', 'Mujer', '987 Cedar St', '333-333-585','Misery');
 
-INSERT INTO Services (ServiceType, Status) VALUES
-('Autoriacion de medicinas', 'Enabled'),
+
+INSERT INTO Services (ServiceName, Status) VALUES
+('Autorización de medicamentos', 'Enabled'),
 ('Pago de facturas', 'Enabled'),
 ('Solicitud de medicamentos', 'Enabled'),
 ('Información general', 'Enabled'),
@@ -132,7 +140,7 @@ FROM
     INNER JOIN Users u ON q.UserId = u.Id
     INNER JOIN Employees e ON u.EmployeesId = e.Id
 WHERE
-    q.Status = 'in process'
+    q.Status = 'En proceso'
 GROUP BY
     q.UserId
 HAVING
@@ -153,10 +161,26 @@ WHERE
     DATE(sh.CreationDate) = CURDATE()
     AND (q.Status = 'in process' OR q.Status = 'Slope')
 GROUP BY
+
+
     sh.ServiceId
 ORDER BY
     ShiftDemand DESC
 LIMIT 1;
+
+
+CREATE VIEW ViewQueueToReassign AS
+SELECT 
+q.Id,
+q.UserId,
+q.Status, 
+s.ServiceName AS AssociatedService
+FROM Queues q
+LEFT JOIN Shifts sh ON q.ShiftId = sh.Id
+LEFT JOIN Services s ON sh.ServiceId = s.Id
+WHERE q.Status = 'Por reasignar' AND q.UserId IS NULL
+ORDER BY q.CreationDate ASC;
+
 
 
 --DROP TABLES Employees, Users, Patients, Services, Shifts, Queues;
@@ -165,6 +189,7 @@ LIMIT 1;
 
 
 
+SELECT * FROM ViewQueueToReassign;
 
 Select * FROM ViewQueuesStatus;
 
