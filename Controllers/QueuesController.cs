@@ -27,11 +27,10 @@ namespace TurnosLaM.Controllers
        var queue = await _context.Queues.FirstOrDefaultAsync(); // Obtener el primer turno de la base de datos
         return View();
     }
-            
+
     [HttpPost]
     public async Task<IActionResult> SaveDocument(string document){
         Patient patient = await _context.Patients.FirstOrDefaultAsync( u => u.Document.Equals(document));
-
         if(patient != null){
             HttpContext.Session.SetString("patientid", patient.Id.ToString());
             return RedirectToAction("Services","Users");

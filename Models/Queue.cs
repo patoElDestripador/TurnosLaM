@@ -6,7 +6,7 @@ namespace TurnosLaM.Models
     public class Queue
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public int ShiftId { get; set; }
         public string? Status { get; set; }
         public string? AssignedShift { get; set; }
