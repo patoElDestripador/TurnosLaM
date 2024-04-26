@@ -36,11 +36,7 @@ public class QueuesController : Controller
         TempData["documentNotFoundNotify"] = document;
         return RedirectToAction("Document","Users");
         //notificar y enviar info de continuar documentNotFound()
-
     }
-
-
-
     public async Task<IActionResult> AssignShift(string? serviceName)
     {
         string id = HttpContext.Session.GetString("patientid");
@@ -98,8 +94,8 @@ public class QueuesController : Controller
         }else{
             lastDate.Counter = lastDate.Counter+1;
             username = $"{lastDate.Counter} - {cleanService.Substring(0, 2)}";
-             _context.DailyCounters.Update(lastDate);
-             _context.SaveChanges();
+            _context.DailyCounters.Update(lastDate);
+            _context.SaveChanges();
         }
         return username;
     }
@@ -123,5 +119,4 @@ public class QueuesController : Controller
             }
         }
     }
-
 }

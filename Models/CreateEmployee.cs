@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 namespace TurnosLaM.Models
 {
-    public class Employee
+    public class CreateEmployee
     {
         [Key]
         public int Id { get; set; }
@@ -11,6 +11,12 @@ namespace TurnosLaM.Models
         public string? PhoneNumber { get; set; }
         [MaxLength(50)]
         public string? Status { get; set; }
+        public string? Password { get; set; }
         public DateTime CreationTime { get; set; }
+        public string? Role { get; set; }
+        public bool Skill1 { get; set; }
+        public bool Skill2 { get; set; }
+        public bool Skill3 { get; set; }
+        public bool Skill4 { get; set; }
     }
 }

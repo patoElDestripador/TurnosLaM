@@ -1,7 +1,9 @@
+using System.ComponentModel.DataAnnotations;
 namespace TurnosLaM.Models
 {
     public class QueueStatus
     {
+        [Key]
         public int QueueId {get; set;}
         public int UserId { get; set;}
         public int EmployeeId { get; set;}
