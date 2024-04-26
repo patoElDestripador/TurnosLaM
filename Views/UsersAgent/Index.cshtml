@@ -1,7 +1,56 @@
-@{
-    ViewData["Title"] = "Panel agente";
+ @{
+    Layout=null;
 }
+ 
+ 
+ @model TurnosLaM.Models.Pacientqueue;
 
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TurnosLaM.styles.css" asp-append-version="true" />
+    <link rel="shortcut icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSI4Ljc1IiB2aWV3Qm94PSIwIDAgMTAyNCA4OTYiPjxwYXRoIGZpbGw9IiNmZmZmZmYiIGQ9Ik01NzAgMzg0aDM4cTEzIDAgMjIuNSA5LjVUNjQwIDQxNnQtOS41IDIyLjVUNjA4IDQ0OGgtMzhxLTEwIDI4LTM0LjUgNDZUNDgwIDUxMnEtNDAgMC02OC0yOHQtMjgtNjh0MjgtNjh0NjgtMjhxMzEgMCA1NS41IDE4dDM0LjUgNDZtNDIyIDY0aC0zNHEtOSAxMDEtNzEuNSAxODYuNVQ3MjUgNzcydC0yMTMgNTl2MzNxMCAxMy05LjUgMjIuNVQ0ODAgODk2dC0yMi41LTkuNVQ0NDggODY0di05OHEtMTA2LTgtMTkyLTU5di03NnE5NyA3MyAyMjQgNzNxNzQgMCAxMzctMTUuNXQxMTEuNS00NnQ3Ni04MC41VDgzMiA0NDhxMC04Ny00Ny0xNjAuNVQ2NTcgMTcxdC0xNzctNDN0LTE3NyA0M3QtMTI4IDExNi41VDEyOCA0NDhIMzJxLTEzIDAtMjIuNS05LjVUMCA0MTZ0OS41LTIyLjVUMzIgMzg0aDM4cTE4LTk4IDg1LTE3NS41VDMyMCA5NFY0MVE0MTIgMCA1MTIgMHExMTYgMCAyMTUuNSA1MXQxNjEgMTM5VDk1OCAzODRoMzRxMTMgMCAyMi41IDkuNXQ5LjUgMjIuNXQtOS41IDIyLjVUOTkyIDQ0OCIvPjwvc3ZnPg==" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Play&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+        <nav class="p-2 mb-3 border-bottom">
+        <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <h3 class="justify-content-start"><a class="text-decoration-none text-dark" asp-controller="Home"
+                asp-action="Index">TurnosLaM</a></h3>
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#" class="nav-link px-2 text-secondary">Turnos</a></li>
+            <li><a href="#" class="nav-link px-2 text-secondary">Cola</a></li>
+            </ul>
+
+
+            <div class="dropdown text-end">
+                    <div class="flex-shrink-1 dropdown">
+                        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://img2.freepnges.com/20180319/lwq/kisspng-computer-icons-avatar-business-agent-icon-5ab04fea07c921.3218028215215042340319.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small shadow">
+                            <li><button class="dropdown-item" onclick="hola()">Profile</button></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a asp-controller="" asp-action="" class="dropdown-item">Sign
+                                    out</a></li>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+        </div>
+        </nav>
+
+ 
 <div class="row">
     <div class="col-7 d-flex align-items-center" style="height: 75vh;">
         <div class="card shadow-sm col-12">
@@ -11,18 +60,18 @@
             <div class="card-body shadow-sm">
                 <form method="post">
                     <div class="mb-3">
-                        <label class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" aria-describedby="Nombre">
+                        <label class="form-label" >Nombre:</label>
+                        <input type="text" class="form-control"  for aria-describedby="Nombre" value="@Model.FirstName">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Apellidos</label>
-                        <input type="text" class="form-control" aria-describedby="Apellidos">
+                        <label class="form-label" >Apellidos</label>
+                        <input type="text" value="@Model.LastName" class="form-control" aria-describedby="Apellidos">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Documento</label>
-                        <input type="text" class="form-control" aria-describedby="Documento de identidad">
+                        <label class="form-label" ></label>Documento</label>
+                        <input type="text" class="form-control" aria-describedby="Documento de identidad" value="@Model.Document">
                     </div>
-                    <div class="mb-3">
+@*                     <div class="mb-3">
                         <label class="form-label">EPS</label>
                         <input type="text" class="form-control" aria-describedby="EPS">
                     </div>
@@ -105,19 +154,76 @@
                     <div class="mt-4 d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary mt-2">Guardar</button>
                     </div> *@
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <label class="form-label">Turno</label>
+                            <input type="text" class="form-control" value="@Model.AssignedShift"
+                             aria-describedby="Turno">
+                        </div>
+                        <div class="col-9">
+                            <label class="form-label">Servicio</label>
+                            <input type="text" class="form-control" aria-describedby="Servicio" value="@Model.ServiceName" >
+                        </div>
+                    </div>
+                    <div class="mt-4 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
     <div class="col-5 border shadow-sm" style="height: 75vh;">
         <div class="row d-flex justify-content-center mt-5">
-            <div class="col-12 d-flex justify-content-center">
-                <a href="#" class="btn btn-primary mt-2 p-4">Siguiente turno</a>
-            </div>
+@*             <div class="col-12 d-flex justify-content-center">
+                <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="MarcarLlamado" >llamar paciente</a>
+            </div> *@
         </div>
         <div class="row d-flex justify-content-center mt-5">
             <div class="col-12 d-flex justify-content-center">
-                <a href="#" class="btn btn-warning mt-2 p-4">Turno ausente</a>
+                @if (Model != null)
+                        {
+                            
+
+                                @if (Model.Calls == 0)
+                                {
+                                    <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.Id">Primer Llamado</a>
+                                    
+                                
+                                }
+                                else if (Model.Calls == 1)
+                                {
+                                    <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.Id">Segundo Llamado</a>
+                                }
+                                else if (Model.Calls == 2)
+                                {
+                                    <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.Id">Tercer Llamado</a>
+                                    <script>
+                                        setTimeout(function() {
+                                            // Después de 20 segundos, si el estado sigue siendo "En espera", se marca como "Ausente"
+                                            if ('@Model.Status' === 'En espera') {
+                                                marcarAusente('@Model.Id');
+                                            }
+                                        }, 20000);
+                                    </script>
+                                    <a onclick="marcarSiguiente()" class="btn btn-primary mt-2 p-4">Siguiente paciente</a>
+                                }
+                                
+                            
+                        }else
+{
+    <!-- Coloca aquí el contenido que deseas mostrar cuando el modelo sea nulo -->
+    <div>
+        <p>El modelo es nulo.</p>
+
+
+
+
+
+
+
+        
+    </div>
+}
             </div>
         </div>
         <div class="row d-flex justify-content-center mt-5">
@@ -138,3 +244,4 @@
         </div>
     </div>
 </div>
+-

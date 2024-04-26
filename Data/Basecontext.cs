@@ -9,10 +9,8 @@ namespace TurnosLaM.Data
         
         public BaseContext(DbContextOptions<BaseContext> options) : base(options)
         { 
-
         }
         public object UsersAdmin { get; internal set; }
-        // SE REGISTRAN LOS MODELOS EN Context:
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Queue> Queues { get; set; }
@@ -20,10 +18,10 @@ namespace TurnosLaM.Data
         public DbSet<Service> Services { get; set; }
         public DbSet<ShiftModel> Shifts { get; set; }
         public DbSet<User> Users { get; set; }
-        //public DbSet<teble> Teble { get;}
         public DbSet<DailyCounter> DailyCounters { get; set; }
         public DbSet<QueueToReassign> ViewQueueToReassign { get; set; }
 
     }
+    
 
 }

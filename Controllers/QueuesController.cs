@@ -2,28 +2,32 @@ using System.Diagnostics;
 using TurnosLaM.Filters;
 using Microsoft.AspNetCore.Mvc;
 using TurnosLaM.Models;
-using System;
 using Microsoft.AspNetCore.Authentication;
+using TurnosLaM.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Web;
 using TurnosLaM.Data;
 using Microsoft.EntityFrameworkCore;
 using TurnosLaM.Helpers;
 
-namespace TurnosLaM.Controllers;
-//[TheGuardcito]
-public class QueuesController : Controller
+namespace TurnosLaM.Controllers
 {
-
-    public readonly BaseContext _context; 
-    public QueuesController(BaseContext context)
+    public class QueuesController : Controller
     {
-        _context = context;
-    }
+        private readonly BaseContext _context;
 
-    public IActionResult ShiftQueue()
+        public QueuesController(BaseContext context)
+        {
+            _context = context;
+        }
+
+     public async Task<IActionResult> Index()
     {
+       var queue = await _context.Queues.FirstOrDefaultAsync(); // Obtener el primer turno de la base de datos
         return View();
     }
-
+            
     [HttpPost]
     public async Task<IActionResult> SaveDocument(string document){
         Patient patient = await _context.Patients.FirstOrDefaultAsync( u => u.Document.Equals(document));
@@ -38,8 +42,6 @@ public class QueuesController : Controller
         //notificar y enviar info de continuar documentNotFound()
 
     }
-
-
 
     public async Task<IActionResult> AssignShift(string? serviceName)
     {
@@ -124,4 +126,42 @@ public class QueuesController : Controller
         }
     }
 
+        public async Task<ActionResult> MarcarLlamado(int id)
+        {
+            var assignedShift = await _context.Queues.FindAsync(id); // Encontrar el turno en la base de datos
+            if (assignedShift != null)
+            {
+                TempData["MessageSuccess"] = $"Llamado #{assignedShift.Calls + 1}";
+
+                if (assignedShift.Calls == 2)
+                {
+                    assignedShift.Status = "En espera";
+                    assignedShift.AssignmentTime = DateTime.Now; // Guarda la hora de inicio para el temporizador
+                    await _context.SaveChangesAsync(); // Guardar los cambios en la base de datos
+                }
+                else if (assignedShift.Calls >= 3)
+                {
+                    assignedShift.Status = "Ausente";
+                    await _context.SaveChangesAsync(); // Guardar los cambios en la base de datos
+                }
+                else
+                {
+                    assignedShift.Calls++;
+                    await _context.SaveChangesAsync(); // Guardar los cambios en la base de datos
+                }
+            }
+            return RedirectToAction("Queues"); // Redirigir a la lista de turnos
+        }
+    } 
 }
+
+
+    
+
+
+    
+
+
+
+//[TheGuardacito]
+
