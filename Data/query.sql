@@ -1,4 +1,4 @@
--- Active: 1713988701216@@bnaeksshtlfrlbvcc3k7-mysql.services.clever-cloud.com@3306@bnaeksshtlfrlbvcc3k7
+-- Active: 1714003204241@@bnaeksshtlfrlbvcc3k7-mysql.services.clever-cloud.com@3306@bnaeksshtlfrlbvcc3k7
 
 CREATE TABLE Employees (
     Id INT PRIMARY KEY AUTO_INCREMENT,

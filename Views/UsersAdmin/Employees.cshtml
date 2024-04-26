@@ -15,6 +15,7 @@
                     <th>Email</th>
                     <th>Número de telefono</th>
                     <th>Estado</th>
+                    <th>Cambio de Skills</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +27,19 @@
                         <td>@Employee.Email</td>
                         <td>@Employee.PhoneNumber</td>
                         <td>@Employee.Status</td>
+                        <td>
+                            <input type="checkbox">
+                            <label class="form-check-label">Am</label> @*Am= Autorización de Medicamentos*@
+
+                            <input type="checkbox">
+                            <label class="form-check-label">Pf</label> @*Pf= pago de Facturas*@
+
+                            <input type="checkbox">
+                            <label class="form-check-label">Inf</label> @*Inf= Información general*@
+
+                            <input type="checkbox">
+                            <label class="form-check-label">Cm</label> @*Cm= Citas Medicas*@
+                        </td>
                     </tr>
                 }
             </tbody>
