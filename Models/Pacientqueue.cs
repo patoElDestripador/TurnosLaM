@@ -1,9 +1,11 @@
-using System.ComponentModel.DataAnnotations;
+
 using TurnosLaM.Data;
+using TurnosLaM.Models;
+
 
 namespace TurnosLaM.Models
 {
-    public class Queue
+    public class  Pacientqueue
     {
         public int Id { get; set; }
         public int UserId { get; set; }
@@ -14,7 +16,10 @@ namespace TurnosLaM.Models
         public DateTime? AssignmentTime { get; set; }
         public DateTime? ClosingTime { get; set; }
         public int? Calls { get; set; }
+        public string? Document { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? ServiceName { get; set; }
         
     }
-    
 }

@@ -12,6 +12,10 @@ namespace TurnosLaM.Data
 
         public object UsersAdmin { get; internal set; }
         public DbSet<Queue> Queues { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Service> Services { get; set; }
+
+        
         
     }
     

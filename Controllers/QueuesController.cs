@@ -22,7 +22,7 @@ namespace TurnosLaM.Controllers
 
         }
 
-    public async Task<IActionResult> Index()
+    /* public async Task<IActionResult> Index()
     {
        var queue = await _context.Queues.FirstOrDefaultAsync(); // Obtener el primer turno de la base de datos
         return View();
@@ -54,9 +54,9 @@ namespace TurnosLaM.Controllers
             }
             return RedirectToAction("Queues"); // Redirigir a la lista de turnos
         }
-    }
+    } */
 }
-
+}
 
     
 

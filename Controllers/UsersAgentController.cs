@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using TurnosLaM.Filters;
 using TurnosLaM.Data;
+using TurnosLaM.Models;
+
 
 namespace TurnosLaM.Controllers{
     public class UsersAgentController : Controller
@@ -20,13 +22,36 @@ namespace TurnosLaM.Controllers{
         return View();
     }
 
-    public async Task<IActionResult> Index()
+public async Task<IActionResult> Index()
+{
+    var queue = await _context.Queues.FirstOrDefaultAsync();
+    var patient = await _context.Patients.FirstOrDefaultAsync();
+    var service = await _context.Services.FirstOrDefaultAsync();
+
+    if (queue != null && patient != null && service != null)
     {
-        var queue = await _context.Queues.FirstOrDefaultAsync(); // Obtener el primer turno de la base de datos
-        return View();
+        var Pacientqueue = new Pacientqueue
+        {
+            FirstName = patient.FirstName,
+            LastName = patient.LastName,
+            Document = patient.Document,
+            AssignedShift = queue.AssignedShift,
+            Calls = queue.Calls,
+            ServiceName = service.ServiceName,
+            Id = patient.Id
+
+        };
+
+        return View(Pacientqueue);
     }
-            
-        public async Task<ActionResult> MarcarLlamado(int id)
+
+    // Si no se encuentran registros en alguna de las tablas, devolver null o algún otro manejo apropiado
+    return View(null);
+}
+
+
+   
+/*         public async Task<ActionResult> MarcarLlamado(int id)
         {
             var assignedShift = await _context.Queues.FindAsync(id); // Encontrar el turno en la base de datos
             if (assignedShift != null)
@@ -50,8 +75,28 @@ namespace TurnosLaM.Controllers{
                     await _context.SaveChangesAsync(); // Guardar los cambios en la base de datos
                 }
             }
-            return RedirectToAction("Queues"); // Redirigir a la lista de turnos
+            return RedirectToAction("Index"); // Redirigir a la lista de turnos
+        }  */
+
+        public async Task<ActionResult> IncrementarCalls(int id)
+        {
+            var pacient = await _context.Queues.FindAsync(id);
+            if (pacient != null)
+            {
+              
+                
+                    pacient.Calls = pacient.Calls + 1;
+                
+                    _context.Update(pacient); // Guardar los cambios
+                    await _context.SaveChangesAsync();
+            }
+
+
+            return RedirectToAction("Index");
         }
+
+
+
     }
 
 
