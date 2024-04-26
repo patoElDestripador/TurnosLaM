@@ -89,7 +89,7 @@ namespace TurnosLaM.Controllers
             // Redirecciona a la tabla de 'Empleados':
             return RedirectToAction("Employees", "UsersAdmin");
         }
-
+// ----------------- PANEL VIEW:
         public async Task<IActionResult> Index()
         {
             var queue = await _context.Queues.FirstOrDefaultAsync();
@@ -151,25 +151,14 @@ namespace TurnosLaM.Controllers
             var pacient = await _context.Queues.FindAsync(id);
             if (pacient != null)
             {
-
-
                 pacient.Calls = pacient.Calls + 1;
 
                 _context.Update(pacient); // Guardar los cambios
                 await _context.SaveChangesAsync();
             }
-
-
             return RedirectToAction("Index");
         }
-
-
-
     }
-
-
-
-
 }
 
 
