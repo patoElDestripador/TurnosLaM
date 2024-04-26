@@ -15,6 +15,12 @@ public class UsersAdminController : Controller
     {
         _context = context;
     }
+
+    public IActionResult Index()
+    {
+        return View("Index"); //Cuando tenga problemas que aparentemente no son problemas, detener el Endpoint y eliminar el bing
+    }
+
     //Mostramos la tabla Shifts (Turnos)
     public IActionResult Shifts()
     {

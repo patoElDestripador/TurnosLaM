@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<BaseContext>(options => options.UseMySql(builder.Configuration.GetConnectionString("MiseryShifts"),
+builder.Services.AddDbContext<BaseContext>(options => options.UseMySql(builder.Configuration.GetConnectionString("MiseryShifts2"),
 Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.20-mysql")));
 // ----------------------------------------------------------------
 // Servicio Login:

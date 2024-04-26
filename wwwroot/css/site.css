@@ -125,9 +125,12 @@ body {
   font-size: 35px;
 
 }
-body {
-  overflow: hidden; /* Desactiva el desplazamiento */
+
+
+/* body {
+  overflow: hidden; Desactiva el desplazamiento 
 }
+*/
 
 .bton-solic{
   width: 300px;
