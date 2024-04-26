@@ -55,4 +55,20 @@ public class UsersAdminController : Controller
         
     }
 
+    [HttpPost]
+    public IActionResult ChangeSkills(FormCollection form)
+    {
+        //List<string> lo que hago en esta linea es listar los checkbox que tengo
+        List<string>SelectedSkill = new List<string>();
+        foreach (string key  in form.Keys) //Iteramos sobre las llaves del formulario donde tengo mis checkbox
+        {
+            if(form[key] == "on")
+            {   //Si la skill es seleccionada la añadimos a la lista de SelectedSkill
+                SelectedSkill.Add(key);
+            }
+        }
+        return View("Employess");
+        //Implementar Un modelo de manera de actulizar a la base de datos y ¿Una vista o un Sweet alert de confirmación?
+    }
+
 }
