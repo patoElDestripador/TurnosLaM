@@ -19,9 +19,11 @@ namespace TurnosLaM.Controllers
         }
 
         // ----------------- CREATE ACTION:
-        public IActionResult Create(){
-        return View();
-}
+        public IActionResult Create()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(CreateEmployee employee)
         {
@@ -87,6 +89,9 @@ namespace TurnosLaM.Controllers
             return RedirectToAction("Employees", "UsersAdmin");
         }
         // ----------------- PANEL VIEW:
+        /*
+        Se comento este index ya que el que recibe la funcionalidad es el de mas abajo validar 
+        su funcionamiento o verificar si se pasan los datos necesario de uno a otro 
         public async Task<IActionResult> Index()
         {
             var queue = await _context.Queues.FirstOrDefaultAsync();
@@ -112,6 +117,7 @@ namespace TurnosLaM.Controllers
             // Si no se encuentran registros en alguna de las tablas, devolver null o algún otro manejo apropiado
             return View(null);
         }
+                */
         // ----------------- PANEL VIEW:
         // public async Task<IActionResult> IndexPrueba()
         // {
@@ -192,65 +198,59 @@ namespace TurnosLaM.Controllers
         }
 
 
-
-
-
-
-
-
-
-public async Task<IActionResult> Index()
-{
- 
-    var queue = await _context.Queues.FirstOrDefaultAsync();
-    var patient = await _context.Patients.FirstOrDefaultAsync();
-    var service = await _context.Services.FirstOrDefaultAsync();
-    var isRegistered = await IsPatientRegistered(); 
-
-/*      var queue = await _context.Queues.FirstOrDefaultAsync();
-    var patient = await _context.Patients.FirstOrDefaultAsync();
-    var service = await _context.Services.FirstOrDefaultAsync();
-    var isRegistered = await IsPatientRegistered(); */
-
-    if (queue != null && patient != null && service != null)
-    {
-        var Pacientqueue = new Pacientqueue
+        public async Task<IActionResult> Index()
         {
-            FirstName = patient.FirstName,
-            LastName = patient.LastName,
-            Document = patient.Document,
-            AssignedShift = queue.AssignedShift,
-            Calls = queue.Calls,
-            ServiceName = service.ServiceName,
-            Id = patient.Id,
-            Eps = patient.Eps,
-            IsRegistered = isRegistered ,
-            Address= patient.Address,
-            PhoneNumber= patient.PhoneNumber,
-            Gender= patient.Gender
-     
-            // Agregar la información sobre si el paciente está registrado
-        };
 
-        return View(Pacientqueue);
-    }
-    else
-    {
-        // Si el paciente no está registrado, establecer IsRegistered como false
-        var Pacientqueue = new Pacientqueue
+            var queue = await _context.Queues.FirstOrDefaultAsync();
+            var patient = await _context.Patients.FirstOrDefaultAsync();
+            var service = await _context.Services.FirstOrDefaultAsync();
+            var isRegistered = await IsPatientRegistered();
+
+            /*      var queue = await _context.Queues.FirstOrDefaultAsync();
+                var patient = await _context.Patients.FirstOrDefaultAsync();
+                var service = await _context.Services.FirstOrDefaultAsync();
+                var isRegistered = await IsPatientRegistered(); */
+
+            if (queue != null && patient != null && service != null)
+            {
+                var Pacientqueue = new Pacientqueue
+                {
+                    FirstName = patient.FirstName,
+                    LastName = patient.LastName,
+                    Document = patient.Document,
+                    AssignedShift = queue.AssignedShift,
+                    Calls = queue.Calls,
+                    ServiceName = service.ServiceName,
+                    Id = patient.Id,
+                    Eps = patient.Eps,
+                    IsRegistered = isRegistered,
+                    Address = patient.Address,
+                    PhoneNumber = patient.PhoneNumber,
+                    Gender = patient.Gender
+
+                    // Agregar la información sobre si el paciente está registrado
+                };
+
+                return View(Pacientqueue);
+            }
+            else
+            {
+                // Si el paciente no está registrado, establecer IsRegistered como false
+                var Pacientqueue = new Pacientqueue
+                {
+                    IsRegistered = false
+                };
+
+                return View(Pacientqueue);
+            }
+
+        }
+
+        public async Task<bool> IsPatientRegistered()
         {
-            IsRegistered = false
-        };
-
-        return View(Pacientqueue);
-    }
-    
-}
-public async Task<bool> IsPatientRegistered()
-{
-    var patient = await _context.Patients.FirstOrDefaultAsync();
-    return patient != null; // Si patient no es null, entonces el paciente está registrado
-}
+            var patient = await _context.Patients.FirstOrDefaultAsync();
+            return patient != null; // Si patient no es null, entonces el paciente está registrado
+        }
 
 
 
@@ -258,39 +258,42 @@ public async Task<bool> IsPatientRegistered()
 
 
 
-[HttpGet]
-public IActionResult Createp(){
-    return View();
-}
-
-[HttpPost]
-[Route("Create")]
-public IActionResult Createp(Pacientqueue model) {
-    if (ModelState.IsValid)
-    {
-        var patient = new Patient
+        [HttpGet]
+        public IActionResult Createp()
         {
-            FirstName = model.FirstName,
-            LastName = model.LastName,
-            Document = model.Document,
-            Eps = model.Eps
-            
-            // Ajusta esto según sea necesario para incluir otros campos
-        };
+            return View();
+        }
 
-        _context.Patients.Add(patient);
-        _context.SaveChanges();
-        return RedirectToAction("Index");
+        [HttpPost]
+        [Route("Create")]
+        public IActionResult Createp(Pacientqueue model)
+        {
+            if (ModelState.IsValid)
+            {
+                var patient = new Patient
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Document = model.Document,
+                    Eps = model.Eps
+
+                    // Ajusta esto según sea necesario para incluir otros campos
+                };
+
+                _context.Patients.Add(patient);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            // Si el modelo no es válido, regresa a la vista con los errores
+            return View(model);
+        }
+
+
+
+
+
     }
-    // Si el modelo no es válido, regresa a la vista con los errores
-    return View(model);
 }
-
-
-
-
-
-}}
 
 
 
