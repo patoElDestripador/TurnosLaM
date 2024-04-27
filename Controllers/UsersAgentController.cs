@@ -17,7 +17,6 @@ namespace TurnosLaM.Controllers
         {
             _context = context;
         }
-        // ----------------- PANEL VIEW:
 
         // ----------------- CREATE VIEW:
         public async Task<IActionResult> Create()
@@ -89,7 +88,7 @@ namespace TurnosLaM.Controllers
             // Redirecciona a la tabla de 'Empleados':
             return RedirectToAction("Employees", "UsersAdmin");
         }
-// ----------------- PANEL VIEW:
+        // ----------------- PANEL VIEW:
         public async Task<IActionResult> Index()
         {
             var queue = await _context.Queues.FirstOrDefaultAsync();
@@ -107,7 +106,6 @@ namespace TurnosLaM.Controllers
                     Calls = queue.Calls,
                     ServiceName = service.ServiceName,
                     Id = patient.Id
-
                 };
 
                 return View(Pacientqueue);
@@ -116,7 +114,43 @@ namespace TurnosLaM.Controllers
             // Si no se encuentran registros en alguna de las tablas, devolver null o algún otro manejo apropiado
             return View(null);
         }
+        // ----------------- PANEL VIEW:
+        // public async Task<IActionResult> IndexPrueba()
+        // {
+        //     // Se trae el siguiente turno en cola:
+        //     var queue = await _context.Queues.FirstOrDefaultAsync();
+        //     // Se busca el turno que está asociado:
+        //     var shift = await _context.Shifts.FindAsync(queue.ShiftId);
+        //     // Se busca el usuario que esté asociado con el turno:
+        //     var patient = await _context.Patients.FindAsync(shift.PatientId);
 
+        //     // Se confirma si el siguiente turno en cola no ha sido atendido:
+        //     if(queue.Status == "En espera")
+        //     {
+        //         return View(patient);
+        //     }
+
+
+
+        //     if (queue != null && patient != null && service != null)
+        //     {
+        //         var Pacientqueue = new Pacientqueue
+        //         {
+        //             FirstName = patient.FirstName,
+        //             LastName = patient.LastName,
+        //             Document = patient.Document,
+        //             AssignedShift = queue.AssignedShift,
+        //             Calls = queue.Calls,
+        //             ServiceName = service.ServiceName,
+        //             Id = patient.Id
+        //         };
+
+        //         return View(Pacientqueue);
+        //     }
+
+        //     // Si no se encuentran registros en alguna de las tablas, devolver null o algún otro manejo apropiado
+        //     return View(null);
+        // }
 
 
         /*         public async Task<ActionResult> MarcarLlamado(int id)

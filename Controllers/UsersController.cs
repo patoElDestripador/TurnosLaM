@@ -33,9 +33,6 @@ namespace TurnosLaM.Controllers{
         return View( _context.Queues.Where(q => q.Status == "En espera").OrderBy(q => q.CreationDate).Take(10).ToList());
     }
 
-    
-
-
 }
 }
 

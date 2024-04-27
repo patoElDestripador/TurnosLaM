@@ -1,6 +1,9 @@
+@{
+    ViewData["Title"] = "Panel asesor";
+}
 
- 
- @model Pacientqueue;
+
+@model Pacientqueue;
 
 <div class="row">
     <div class="col-7 d-flex align-items-center" style="height: 75vh;">
@@ -22,7 +25,7 @@
                         <label class="form-label" ></label>Documento</label>
                         <input type="text" class="form-control" aria-describedby="Documento de identidad" value="@Model.Document">
                     </div>
-@*                     <div class="mb-3">
+@*                  <div class="mb-3">
                         <label class="form-label">EPS</label>
                         <input type="text" class="form-control" aria-describedby="EPS">
                     </div>
@@ -109,7 +112,7 @@
                         <div class="col-3">
                             <label class="form-label">Turno</label>
                             <input type="text" class="form-control" value="@Model.AssignedShift"
-                             aria-describedby="Turno">
+                            aria-describedby="Turno">
                         </div>
                         <div class="col-9">
                             <label class="form-label">Servicio</label>
