@@ -1,13 +1,11 @@
--- SQLBook: Code
--- Active: 1713899042493@@bnaeksshtlfrlbvcc3k7-mysql.services.clever-cloud.com@3306@bnaeksshtlfrlbvcc3k7
-
 CREATE TABLE Employees (
     Id INT PRIMARY KEY AUTO_INCREMENT,
     FirstName VARCHAR(50),
     LastName VARCHAR(50),
     Email VARCHAR(100),
     PhoneNumber VARCHAR(20),
-    Status ENUM('Active', 'Disabled', 'Vacation')
+    Status ENUM('Active', 'Disabled', 'Vacation'),
+    CreationDate DATETIME
 );
 
 CREATE TABLE Users (
@@ -109,21 +107,21 @@ INSERT INTO Services (ServiceName, Status) VALUES
 ('Test de sangre', 'Disabled'),
 ('Ultrasonido', 'Disabled');
 
-INSERT INTO Shifts (PatientId, ServiceId, CreationDate, Shift) VALUES
-(1, 1, '2024-04-23 08:00:00', 1),
-(2, 2, '2024-04-23 09:00:00', 2),
-(3, 1, '2024-04-23 10:00:00', 3),
-(4, 3, '2024-04-24 08:00:00', 1),
-(5, 1, '2024-04-24 09:00:00', 2),
-(6, 2, '2024-04-24 10:00:00', 3);
+INSERT INTO Shifts (PatientId, ServiceId, CreationDate) VALUES
+(1, 1, '2024-04-23 08:00:00'),
+(2, 2, '2024-04-23 09:00:00'),
+(3, 1, '2024-04-23 10:00:00'),
+(4, 3, '2024-04-24 08:00:00'),
+(5, 1, '2024-04-24 09:00:00'),
+(6, 2, '2024-04-24 10:00:00');
 
 INSERT INTO Queues (UserId, ShiftId, Status, AssignedShift, CreationDate, AssignmentTime, ClosingTime, Calls) VALUES
-(1, 1, 'Atendida', 'Morning', '2024-04-23 07:55:00', '2024-04-23 08:05:00', '2024-04-23 08:15:00', 1),
-(2, 2, 'En espera', 'Afternoon', '2024-04-23 08:55:00', '2024-04-23 09:05:00', NULL, 2),
-(3, 3, 'Ausente', 'Evening', '2024-04-23 09:55:00', '2024-04-23 10:05:00', '2024-04-23 10:20:00', 0),
-(5, 4, 'Atendida', 'Morning', '2024-04-24 07:55:00', '2024-04-24 08:05:00', '2024-04-24 08:15:00', 2),
-(6, 5, 'En espera', 'Afternoon', '2024-04-24 08:55:00', '2024-04-24 09:05:00', NULL, 1),
-(7, 6, 'Ausente', 'Evening', '2024-04-24 09:55:00', '2024-04-24 10:05:00', '2024-04-24 10:20:00', 0);
+(1, 1, 'En espera', '1 - FR', '2024-04-23 07:55:00', NULL, NULL, 0),
+(2, 2, 'En espera', '1 - FR', '2024-04-23 08:55:00', NULL, NULL, 2),
+(3, 3, 'En espera', '1 - FR', '2024-04-23 09:55:00', NULL, NULL, 0),
+(5, 4, 'En espera', '1 - FR', '2024-04-24 07:55:00', NULL, NULL, 0),
+(6, 5, 'En espera', '1 - FR', '2024-04-24 08:55:00', NULL, NULL, 1),
+(7, 6, 'En espera', '1 - FR', '2024-04-24 09:55:00', NULL, NULL, 0);
 
 CREATE VIEW ViewQueuesStatus AS
 SELECT 
@@ -159,10 +157,8 @@ FROM
     INNER JOIN Queues q ON sh.Id = q.ShiftId
 WHERE
     DATE(sh.CreationDate) = CURDATE()
-    AND (q.Status = 'in process' OR q.Status = 'Slope')
+    AND (q.Status = 'En progreso' OR q.Status = 'En espera' OR q.Status = "En espera")
 GROUP BY
-
-
     sh.ServiceId
 ORDER BY
     ShiftDemand DESC
@@ -183,7 +179,7 @@ ORDER BY q.CreationDate ASC;
 
 
 
---DROP TABLES Employees, Users, Patients, Services, Shifts, Queues;
+--DROP TABLES Employees, Users, Patients, Services, Shifts, Queues,DailyCounters;
 
 -- DROP VIEW ViewQueuesStatus,ViewServiceDemanded;
 

@@ -112,7 +112,6 @@ namespace TurnosLaM.Controllers
 
                 return View(Pacientqueue);
             }
-
             // Si no se encuentran registros en alguna de las tablas, devolver null o algún otro manejo apropiado
             return View(null);
         }
