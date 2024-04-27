@@ -17,14 +17,11 @@ namespace TurnosLaM.Controllers
         {
             _context = context;
         }
-        // ----------------- PANEL VIEW:
 
-        // ----------------- CREATE VIEW:
-        public async Task<IActionResult> Create()
-        {
-            return View();
-        }
         // ----------------- CREATE ACTION:
+        public IActionResult Create(){
+        return View();
+}
         [HttpPost]
         public async Task<IActionResult> Create(CreateEmployee employee)
         {
@@ -90,61 +87,8 @@ namespace TurnosLaM.Controllers
             return RedirectToAction("Employees", "UsersAdmin");
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var queue = await _context.Queues.FirstOrDefaultAsync();
-            var patient = await _context.Patients.FirstOrDefaultAsync();
-            var service = await _context.Services.FirstOrDefaultAsync();
-
-            if (queue != null && patient != null && service != null)
-            {
-                var Pacientqueue = new Pacientqueue
-                {
-                    FirstName = patient.FirstName,
-                    LastName = patient.LastName,
-                    Document = patient.Document,
-                    AssignedShift = queue.AssignedShift,
-                    Calls = queue.Calls,
-                    ServiceName = service.ServiceName,
-                    Id = patient.Id
-
-                };
-
-                return View(Pacientqueue);
-            }
-
-            // Si no se encuentran registros en alguna de las tablas, devolver null o algún otro manejo apropiado
-            return View(null);
-        }
 
 
-
-        /*         public async Task<ActionResult> MarcarLlamado(int id)
-                {
-                    var assignedShift = await _context.Queues.FindAsync(id); // Encontrar el turno en la base de datos
-                    if (assignedShift != null)
-                    {
-                        TempData["MessageSuccess"] = $"Llamado #{assignedShift.Calls + 1}";
-
-                        if (assignedShift.Calls == 2)
-                        {
-                            assignedShift.Status = "En espera";
-                            assignedShift.AssignmentTime = DateTime.Now; // Guarda la hora de inicio para el temporizador
-                            await _context.SaveChangesAsync(); // Guardar los cambios en la base de datos
-                        }
-                        else if (assignedShift.Calls >= 3)
-                        {
-                            assignedShift.Status = "Ausente";
-                            await _context.SaveChangesAsync(); // Guardar los cambios en la base de datos
-                        }
-                        else
-                        {
-                            assignedShift.Calls++;
-                            await _context.SaveChangesAsync(); // Guardar los cambios en la base de datos
-                        }
-                    }
-                    return RedirectToAction("Index"); // Redirigir a la lista de turnos
-                }  */
 
         public async Task<ActionResult> IncrementarCalls(int id)
         {
@@ -165,12 +109,105 @@ namespace TurnosLaM.Controllers
 
 
 
+
+
+
+
+
+
+public async Task<IActionResult> Index()
+{
+ 
+    var queue = await _context.Queues.FirstOrDefaultAsync();
+    var patient = await _context.Patients.FirstOrDefaultAsync();
+    var service = await _context.Services.FirstOrDefaultAsync();
+    var isRegistered = await IsPatientRegistered(); 
+
+/*      var queue = await _context.Queues.FirstOrDefaultAsync();
+    var patient = await _context.Patients.FirstOrDefaultAsync();
+    var service = await _context.Services.FirstOrDefaultAsync();
+    var isRegistered = await IsPatientRegistered(); */
+
+    if (queue != null && patient != null && service != null)
+    {
+        var Pacientqueue = new Pacientqueue
+        {
+            FirstName = patient.FirstName,
+            LastName = patient.LastName,
+            Document = patient.Document,
+            AssignedShift = queue.AssignedShift,
+            Calls = queue.Calls,
+            ServiceName = service.ServiceName,
+            Id = patient.Id,
+            Eps = patient.Eps,
+            IsRegistered = isRegistered ,
+            Address= patient.Address,
+            PhoneNumber= patient.PhoneNumber,
+            Gender= patient.Gender
+     
+            // Agregar la información sobre si el paciente está registrado
+        };
+
+        return View(Pacientqueue);
     }
+    else
+    {
+        // Si el paciente no está registrado, establecer IsRegistered como false
+        var Pacientqueue = new Pacientqueue
+        {
+            IsRegistered = false
+        };
 
-
-
-
+        return View(Pacientqueue);
+    }
+    
 }
+public async Task<bool> IsPatientRegistered()
+{
+    var patient = await _context.Patients.FirstOrDefaultAsync();
+    return patient != null; // Si patient no es null, entonces el paciente está registrado
+}
+
+
+
+
+
+
+
+[HttpGet]
+public IActionResult Createp(){
+    return View();
+}
+
+[HttpPost]
+[Route("Create")]
+public IActionResult Createp(Pacientqueue model) {
+    if (ModelState.IsValid)
+    {
+        var patient = new Patient
+        {
+            FirstName = model.FirstName,
+            LastName = model.LastName,
+            Document = model.Document,
+            Eps = model.Eps
+            
+            // Ajusta esto según sea necesario para incluir otros campos
+        };
+
+        _context.Patients.Add(patient);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
+    }
+    // Si el modelo no es válido, regresa a la vista con los errores
+    return View(model);
+}
+
+
+
+
+
+}}
+
 
 
 
