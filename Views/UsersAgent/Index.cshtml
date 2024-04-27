@@ -3,121 +3,57 @@
  @model Pacientqueue;
 
 <div class="row">
-    <div class="col-7 d-flex align-items-center" style="height: 75vh;">
+    <div class="col-7 d-flex align-items-center" >
         <div class="card shadow-sm col-12">
             <div class="card-header bg-dark text-white text-center">
                 Información del usuario
             </div>
-            <div class="card-body shadow-sm">
-                <form method="post">
+            <div class="card-body shadow-sm"> 
+                <form  asp-controller="UsersAgent"  asp-action="Createp" method="post">
                     <div class="mb-3">
                         <label class="form-label" >Nombre:</label>
-                        <input type="text" class="form-control"  for aria-describedby="Nombre" value="@Model.FirstName">
+                        <input id="FirstName" type="text" class="form-control" asp-for="FirstName" aria-describedby="Nombre">
                     </div>
                     <div class="mb-3">
                         <label class="form-label" >Apellidos</label>
-                        <input type="text" value="@Model.LastName" class="form-control" aria-describedby="Apellidos">
+                        <input type="text" asp-for="LastName"class="form-control" aria-describedby="Apellidos" id="LastName">
                     </div>
                     <div class="mb-3">
                         <label class="form-label" ></label>Documento</label>
-                        <input type="text" class="form-control" aria-describedby="Documento de identidad" value="@Model.Document">
-                    </div>
-@*                     <div class="mb-3">
-                        <label class="form-label">EPS</label>
-                        <input type="text" class="form-control" aria-describedby="EPS">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Dirección</label>
-                        <input type="text" class="form-control" aria-describedby="Dirección">
+                        <input type="text" class="form-control" aria-describedby="Document" id="Document"    asp-for="Document">
                     </div>
                     <div class="row mb-3">
-                        <div class="col-8 mt-3">
-                            <label class="form-label">Teléfono</label>
-                            <input type="number" class="form-control" aria-describedby="Teléfono">
+                        <div class="col-3">
+                            <label class="form-label">Turno</label>
+                            <input type="text" class="form-control"  id="AssignedShift"   aria-describedby="Turno"  asp-for="AssignedShift" >
                         </div>
-                        <div class="col-4 mt-5">
-                            <select class="form-select">
-                                <option value="" selected disabled>Género</option>
-                                <option value="M">Masculino</option>
-                                <option value="F">Femenino</option>
-                                <option value="O">Otro</option>
+                        <div class="col-3">
+                            <label class="form-label">Eps</label>
+                            <input type="text" class="form-control"  aria-describedby="Turno"  id="Eps" asp-for="Eps" >
+                        </div>
+                        <div class="col-9">
+                            <label class="form-label">Servicio</label>
+                            <input type="text" class="form-control" id="ServiceName"  asp-for="ServiceName" aria-describedby="Servicio">
+                        </div>
+                        <div class="col-9">
+                            <label class="form-label">Address</label>
+                            <input type="text" class="form-control" aria-describedby="Servicio"  id="Address" asp-for="Address"  >
+                        </div>
+                        <div>
+                            <select class="form-select mt-5" id="Gender" asp-for="Gender">
+                                <option value="">Género</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="other">Otro</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-3">
-                            <label class="form-label">Turno</label>
-                            <input type="text" class="form-control" aria-describedby="Turno" disabled>
-                        </div>
                         <div class="col-9">
-                            <label class="form-label">Servicio</label>
-                            <input type="text" class="form-control" aria-describedby="Servicio" disabled>
+                            <label class="form-label">Address</label>
+                            <input type="text" class="form-control" aria-describedby="Servicio"  id="PhoneNumber" asp-for="Address"  >
                         </div>
                     </div>
                     <div class="mt-4 d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
-                    </div>
-                    @* -------------------- disabled -------------------- *@
-                    @* <div class="mb-3">
-                        <label class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" aria-describedby="Nombre" value="###" disabled>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Apellidos</label>
-                        <input type="text" class="form-control" aria-describedby="Apellidos" value="###" disabled>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Documento</label>
-                        <input type="text" class="form-control" aria-describedby="Documento de identidad" value="###" disabled>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">EPS</label>
-                        <input type="text" class="form-control" aria-describedby="EPS" value="###" disabled>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Dirección</label>
-                        <input type="text" class="form-control" aria-describedby="Dirección" value="###" disabled>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-8 mt-3">
-                            <label class="form-label">Teléfono</label>
-                            <input type="number" class="form-control" aria-describedby="Teléfono" value="###" disabled>
-                        </div>
-                        <div class="col-4 mt-5">
-                            <select class="form-select" disabled>
-                                <option value="" selected disabled>Género</option>
-                                <option value="M">Masculino</option>
-                                <option value="F">Femenino</option>
-                                <option value="O">Otro</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-3">
-                            <label class="form-label">Turno</label>
-                            <input type="text" class="form-control" aria-describedby="Turno" value="###" disabled>
-                        </div>
-                        <div class="col-9">
-                            <label class="form-label">Servicio</label>
-                            <input type="text" class="form-control" aria-describedby="Servicio" value="###" disabled>
-                        </div>
-                    </div>
-                    <div class="mt-4 d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
-                    </div> *@
-                    <div class="row mb-3">
-                        <div class="col-3">
-                            <label class="form-label">Turno</label>
-                            <input type="text" class="form-control" value="@Model.AssignedShift"
-                             aria-describedby="Turno">
-                        </div>
-                        <div class="col-9">
-                            <label class="form-label">Servicio</label>
-                            <input type="text" class="form-control" aria-describedby="Servicio" value="@Model.ServiceName" >
-                        </div>
-                    </div>
-                    <div class="mt-4 d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                         <button type="submit" class="btn btn-primary mt-2" @((Model.IsRegistered) ? "disabled" : "")>Guardar</button>
                     </div>
                 </form>
             </div>
@@ -125,9 +61,6 @@
     </div>
     <div class="col-5 border shadow-sm" style="height: 75vh;">
         <div class="row d-flex justify-content-center mt-5">
-@*             <div class="col-12 d-flex justify-content-center">
-                <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="MarcarLlamado" >llamar paciente</a>
-            </div> *@
         </div>
         <div class="row d-flex justify-content-center mt-5">
             <div class="col-12 d-flex justify-content-center">
@@ -138,16 +71,17 @@
                                 @if (Model.Calls == 0)
                                 {
                                     <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.Id">Primer Llamado</a>
+                                    <a onclick="marcarSiguiente()" class="btn btn-primary mt-2 p-4">Siguiente paciente</a>
                                     
                                 
                                 }
                                 else if (Model.Calls == 1)
                                 {
                                     <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.Id">Segundo Llamado</a>
+                                    <a onclick="marcarSiguiente()" class="btn btn-primary mt-2 p-4">Siguiente paciente</a>
                                 }
                                 else if (Model.Calls == 2)
                                 {
-                                    <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.Id">Tercer Llamado</a>
                                     <script>
                                         setTimeout(function() {
                                             // Después de 20 segundos, si el estado sigue siendo "En espera", se marca como "Ausente"
@@ -160,21 +94,7 @@
                                 }
                                 
                             
-                        }else
-{
-    <!-- Coloca aquí el contenido que deseas mostrar cuando el modelo sea nulo -->
-    <div>
-        <p>El modelo es nulo.</p>
-
-
-
-
-
-
-
-        
-    </div>
-}
+                        }
             </div>
         </div>
         <div class="row d-flex justify-content-center mt-5">
@@ -194,5 +114,18 @@
             </form>
         </div>
     </div>
+    @if(Model.IsRegistered){
+        <script>
+            document.getElementById("FirstName").setAttribute("disabled",true);
+            document.getElementById("LastName").setAttribute("disabled",true);
+            document.getElementById("Document").setAttribute("disabled",true);
+            document.getElementById("Eps").setAttribute("disabled",true);
+            document.getElementById("AssignedShift").setAttribute("disabled",true);
+            document.getElementById("ServiceName").setAttribute("disabled",true);
+            document.getElementById("Address").setAttribute("disabled",true);
+            document.getElementById("PhoneNumber").setAttribute("disabled",true);
+            document.getElementById("Gender").setAttribute("disabled",true)
+        </script>
+    }
 </div>
--
+
