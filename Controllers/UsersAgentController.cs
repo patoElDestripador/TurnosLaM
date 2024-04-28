@@ -213,7 +213,6 @@ namespace TurnosLaM.Controllers
 
                 return View(Pacientqueue);
             }
-
         }
 
         public async Task<bool> IsPatientRegistered()
@@ -221,7 +220,6 @@ namespace TurnosLaM.Controllers
             var patient = await _context.Patients.FirstOrDefaultAsync();
             return patient != null; // Si patient no es null, entonces el paciente está registrado
         }
-
 
         [HttpGet]
         public IActionResult Createp()
@@ -245,7 +243,6 @@ namespace TurnosLaM.Controllers
                     Address = model.Address,
                     PhoneNumber = model.PhoneNumber
                 };
-
                 _context.Patients.Add(patient);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -255,7 +252,3 @@ namespace TurnosLaM.Controllers
         }
     }
 }
-
-
-
-

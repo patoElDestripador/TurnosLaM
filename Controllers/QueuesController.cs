@@ -89,7 +89,6 @@ namespace TurnosLaM.Controllers
             {
                 //listar turnos en turnero
             }
-
             return RedirectToAction("Document", "Users");
         }
 
