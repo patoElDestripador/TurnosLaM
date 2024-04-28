@@ -89,36 +89,6 @@ namespace TurnosLaM.Controllers
             return RedirectToAction("Employees", "UsersAdmin");
         }
         // ----------------- PANEL VIEW:
-        /*
-        Se comento este index ya que el que recibe la funcionalidad es el de mas abajo validar 
-        su funcionamiento o verificar si se pasan los datos necesario de uno a otro 
-        public async Task<IActionResult> Index()
-        {
-            var queue = await _context.Queues.FirstOrDefaultAsync();
-            var patient = await _context.Patients.FirstOrDefaultAsync();
-            var service = await _context.Services.FirstOrDefaultAsync();
-
-            if (queue != null && patient != null && service != null)
-            {
-                var Pacientqueue = new Pacientqueue
-                {
-                    FirstName = patient.FirstName,
-                    LastName = patient.LastName,
-                    Document = patient.Document,
-                    AssignedShift = queue.AssignedShift,
-                    Calls = queue.Calls,
-                    ServiceName = service.ServiceName,
-                    Id = patient.Id
-                };
-
-                return View(Pacientqueue);
-            }
-
-            // Si no se encuentran registros en alguna de las tablas, devolver null o algún otro manejo apropiado
-            return View(null);
-        }
-                */
-        // ----------------- PANEL VIEW:
         // public async Task<IActionResult> IndexPrueba()
         // {
         //     // Se trae el siguiente turno en cola:
@@ -253,11 +223,6 @@ namespace TurnosLaM.Controllers
         }
 
 
-
-
-
-
-
         [HttpGet]
         public IActionResult Createp()
         {
@@ -275,9 +240,10 @@ namespace TurnosLaM.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Document = model.Document,
-                    Eps = model.Eps
-
-                    // Ajusta esto según sea necesario para incluir otros campos
+                    Eps = model.Eps,
+                    Gender = model.Gender,
+                    Address = model.Address,
+                    PhoneNumber = model.PhoneNumber
                 };
 
                 _context.Patients.Add(patient);
@@ -287,11 +253,6 @@ namespace TurnosLaM.Controllers
             // Si el modelo no es válido, regresa a la vista con los errores
             return View(model);
         }
-
-
-
-
-
     }
 }
 

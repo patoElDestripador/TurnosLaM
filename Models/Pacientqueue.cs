@@ -1,8 +1,4 @@
 
-using TurnosLaM.Data;
-using TurnosLaM.Models;
-
-
 namespace TurnosLaM.Models
 {
     public class  Pacientqueue
