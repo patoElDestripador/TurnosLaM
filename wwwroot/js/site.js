@@ -55,7 +55,7 @@ function documentNotFound(Document) {
   }).then((result) => {
     if (result.isConfirmed) {
         //generar el turno
-        this.submit(); 
+        window.location.href = "/Users/Services";
       }
   });
 
@@ -89,3 +89,13 @@ function sendRequestToController(Controller,method,methodType = "GET") {
 }
 
 
+nexTurn
+function notificationToMissionController(message) {
+  Swal.fire({
+    position: "top-end",
+    icon: "warning",
+    title: `${message}`,
+    showConfirmButton: false,
+    timer: 1000
+  }); 
+}

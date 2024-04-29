@@ -1,12 +1,12 @@
 @{
-    ViewData["Title"] = "Documento - Usuario";
-    Layout=null;
+     Layout=null;
 }
-
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TurnosLaM</title>
+    <title>Document - TurnosLaM</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TurnosLaM.styles.css" asp-append-version="true" />
@@ -15,69 +15,61 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Play&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
 </head> 
-<div class="container">
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        /* Estilos */
-    </style>
-</head>
 <body>
-    <div class="row">
-        <div class="m-5 d-flex justify-content-center ">
-            <h1>Ingresa por favor tu numero de documento</h1>
+    <div class="container-flex">
+        <div class="m-5 d-flex justify-content-center">
+            <h1 >Ingresa por favor tu numero de documento</h1>
         </div>
         <div class="d-flex justify-content-center ">
-            <div class="col-8 ms-5">
+            <div class="col-8 ">
                 <input type="text" class="form-control  border-primary border-2" id="documentNumber" aria-describedby="emailHelp" placeholder="Digite su documento...">
             </div>
         </div>
-        <div class="d-flex justify-content-center ">
-            <div class="card  border-secondary mt-5 card-tecla" style="width: 500px; height: 400px; ">
-                <div class="card-body m-4" style="width: 20rem; ">
-                    <div style="width: 40rem;">
-                        <button class="bton-tecla" onclick="appendNumber(1)">1</button>
-                        <button class="bton-tecla" onclick="appendNumber(2)">2</button>
-                        <button class="bton-tecla" onclick="appendNumber(3)">3</button>
-                    </div>
-                    <div style="width: 40rem;">
-                        <button class="bton-tecla" onclick="appendNumber(4)">4</button>
-                        <button class="bton-tecla" onclick="appendNumber(5)">5</button>
-                        <button class="bton-tecla" onclick="appendNumber(6)">6</button>
-                    </div>
-                    <div style="width: 40rem;">
-                        <button class="bton-tecla" onclick="appendNumber(7)">7</button>
-                        <button class="bton-tecla" onclick="appendNumber(8)">8</button>
-                        <button class="bton-tecla" onclick="appendNumber(9)">9</button>
-                    </div>
-
-                    <div style="width: 40rem;">
-                        <button class="btn-0" onclick="appendNumber(0)">0</button>
-                        <button class="bton-tecla" onclick="deleteLast()">Borrar</button>
-                    </div>
+        <div class="d-flex justify-content-center" >
+            <div class="row mt-5" style="width: 80vh">
+                <div class="col-4">
+                    <button class="btn btn-primary btn-hallo p-3 col-12 mb-2 fs-2" onclick="appendNumber(1)">1</button>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary btn-hallo p-3 col-12 mb-2 fs-2" onclick="appendNumber(2)">2</button>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary btn-hallo p-3 col-12 mb-2 fs-2" onclick="appendNumber(3)">3</button>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary btn-hallo p-3 col-12 mb-2 fs-2" onclick="appendNumber(4)">4</button>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary btn-hallo p-3 col-12 mb-2 fs-2" onclick="appendNumber(5)">5</button>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary btn-hallo p-3 col-12 mb-2 fs-2" onclick="appendNumber(6)">6</button>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary btn-hallo p-3 col-12 mb-2 fs-2" onclick="appendNumber(7)">7</button>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary btn-hallo p-3 col-12 mb-2 fs-2" onclick="appendNumber(8)">8</button>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary btn-hallo p-3 col-12 mb-2 fs-2" onclick="appendNumber(9)">9</button>
+                </div>
+                <div class="col-8">
+                    <button class="btn btn-primary btn-hallo p-3 col-12 mb-2 fs-2" onclick="appendNumber(0)">0</button>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-danger btn-hallo p-3 col-12 mb-2 fs-2" onclick="deleteLast()">Borrar</button>
+                </div>
+                <div class="col-12">
+                    <form asp-controller="Queues" asp-action="SaveDocument" method="post" id="myForm">
+                        <input type="hidden" name="document" id="documentNumberInput">
+                        <button  type="submit" class="btn btn-success btn-hallo p-3 col-12 mb-2 fs-2" id="continueButton" disabled>Continuar</button>
+                    </form>               
                 </div>
             </div>
 
         </div>
-        <div class="d-flex justify-content-end">
-            <form asp-controller="Queues" asp-action="SaveDocument" method="post" id="myForm">
-                <input type="hidden" name="document" id="documentNumberInput">
-                <button type="submit" class="btn btn-success btn-continuar" id="continueButton" disabled>Continuar</button>
-            </form>
-        </div>
     </div>
-
-
-</body>
-</html>
-
-</div>
-
-
     <script>
         function appendNumber(number) {      
             var documentNumberField = document.getElementById('documentNumber');
@@ -90,32 +82,33 @@
         function deleteLast() {
             var currentNumber = document.getElementById('documentNumber').value;
             document.getElementById('documentNumber').value = currentNumber.slice(0, -1);
+            checkInput();
         }
         function checkInput() {
             var documentNumber = document.getElementById('documentNumber').value;
             var continueButton = document.getElementById('continueButton');
 
-            if (documentNumber.length > 0 && documentNumber.length <= 11) {
-                continueButton.removeAttribute('disabled'); // Activar el botón
+            if (documentNumber.length > 8 && documentNumber.length <= 11) {
+                continueButton.removeAttribute('disabled');
             } else {
                 continueButton.setAttribute('disabled', 'disabled');
-                alert('Por favor ingresa un número de documento válido.');
             }
 
             document.getElementById('myForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var documentNumber = document.getElementById('documentNumber').value;
-            document.getElementById('documentNumberInput').value = documentNumber;
-            this.submit(); 
+                event.preventDefault();
+                var documentNumber = document.getElementById('documentNumber').value;
+                document.getElementById('documentNumberInput').value = documentNumber;
+                this.submit(); 
             });
         }
-
     </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</div>
+</body>
+</html>
+
 @if (TempData["shiftNotify"] != null)
 {
     <script>

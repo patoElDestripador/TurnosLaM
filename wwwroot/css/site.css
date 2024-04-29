@@ -3,8 +3,14 @@ html {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+  position: relative;
+  min-height: 100%;
+  width: 100%;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
 
 @media (min-width: 768px) {
   html {
@@ -15,12 +21,12 @@ html {
 
 /* inicio de los estilos de vistas de users Admin*/
 
-.Containerbtn{
+.Containerbtn {
   display: flex;
   justify-content: center;
 }
 
-.botones{
+.botones {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,7 +34,8 @@ html {
   gap: 12px;
   width: 150px;
 }
-.link{
+
+.link {
   margin-top: 100px;
   display: flex;
   justify-content: end;
@@ -36,103 +43,87 @@ html {
 
 /* fin de los estilos de vistas de users Admin*/
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}
 
 
 
-
-.margin-index{
+.margin-index {
   margin-top: 200px;
 }
 
-.margin-server{
+.margin-server {
   margin-top: 50px;
-
 }
 
 /* inicio de los estilos de vistas de users */
-.title{
+.title {
   font-size: 100px;
-
 }
 
-.title-server{
+.title-server {
   font-size: 60px;
-
 }
-.subtitle-server{
+
+.subtitle-server {
   font-size: 40px;
 
 }
 
-.subtitle{
+.subtitle {
   font-size: 60px;
-
 }
-.bton{
+
+.bton {
   width: 200px;
 }
 
-.bton-tecla{
+.bton-tecla {
   width: 100px;
   height: 60px;
   border-radius: 16px;
   margin: 10px;
   font-size: 30px;
-
-
 }
-.btn-0{
+
+.btn-0 {
   margin: 10px;
   margin-left: 10px;
   width: 220px;
   height: 60px;
   border-radius: 10px;
   font-size: 30px;
-
 }
-.card-tecla{
+
+.card-tecla {
   border-radius: 10px;
 }
 
-.btn-continuar{
+.btn-Modify {
   width: 300px;
   font-size: 40px;
   border-radius: 10px;
   margin-top: 30px;
-  
 }
-.btum{
+
+.btum {
   width: 200px;
-  
-}
-.margin-server{
 
 }
-.buton-server{
+
+.buton-server {
   width: 600px;
   font-size: 35px;
 
 }
 
-
-/* body {
-  overflow: hidden; Desactiva el desplazamiento 
-}
-*/
-
-.bton-solic{
+.bton-solic {
   width: 300px;
   font-size: 35px;
 
@@ -149,6 +140,11 @@ body {
   height: 80vh;
   object-fit: cover;
 }
-.dacontainer{
+
+.dacontainer {
   height: 98vh;
+}
+
+.btn-hallo:hover {
+  transform: scale(1.05);
 }

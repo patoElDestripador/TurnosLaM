@@ -40,16 +40,43 @@ namespace TurnosLaM.Controllers
             HttpContext.Session.SetString("patienDocument", document);
             TempData["documentNotFoundNotify"] = document;
             return RedirectToAction("Document", "Users");
-            //notificar y enviar info de continuar documentNotFound()
         }
 
 
-
+        
+        //FUNCTION SIN REFACTORIZAR
         public async Task<IActionResult> AssignShift(string? serviceName)
         {
             string id = HttpContext.Session.GetString("patientid");
             Service service = await _context.Services.FirstOrDefaultAsync(u => u.ServiceName.Equals(serviceName));
-            Patient patient = await _context.Patients.FindAsync(int.Parse(id));
+            Patient patient;
+
+            if(!String.IsNullOrEmpty(id)){
+                 patient = await _context.Patients.FindAsync(int.Parse(id));
+            }else{
+                string documentUnRegi = HttpContext.Session.GetString("patienDocument");
+                patient = await _context.Patients.FirstOrDefaultAsync(u => u.Document == documentUnRegi);
+            }
+
+            if(patient == null){
+                // generar vaian esa dacord al id 
+                string documentUnRegi = HttpContext.Session.GetString("patienDocument");
+                Patient newPatient = new Patient(){                        
+                    Document = documentUnRegi,
+                    FirstName = null,
+                    LastName = null,
+                    Gender = null,
+                    Address = null,
+                    PhoneNumber = null,
+                    Eps = null,
+                    CreationDate = DateTime.Now
+                };
+                 _context.Patients.Add(newPatient);
+                await _context.SaveChangesAsync();
+
+                patient = await _context.Patients.OrderByDescending(e => e.CreationDate).FirstOrDefaultAsync();
+            }
+
             if (!String.IsNullOrEmpty(patient.Document))
             {
                 ShiftModel shiftModel = new ShiftModel()
@@ -82,21 +109,22 @@ namespace TurnosLaM.Controllers
                 }
                 //se llama a js para que valide con el msc 
                 TempData["shiftNotify"] = queueModel.AssignedShift;
-                await _context.Queues.AddAsync(queueModel);
-                await _context.SaveChangesAsync();
+                _context.Queues.Add(queueModel);
+                _context.SaveChanges();
             }
             else
             {
                 //listar turnos en turnero
             }
-            return RedirectToAction("Document", "Users");
-        }
 
+            return RedirectToAction("Services", "Users");
+        }
+        
         public async Task<string> GenerateShift(string Service)
         {
             string cleanService = Service.Trim().ToUpper().Substring(0, 2);
             string username;
-            var lastDate = await _context.DailyCounters.Where(dc => dc.ServiceName == cleanService).OrderByDescending(dc => dc.Day).FirstOrDefaultAsync();
+            var lastDate = await _context.DailyCounters.Where(dc => dc.ServiceName == cleanService && dc.Day == DateTime.Today).OrderByDescending(dc => dc.Day).FirstOrDefaultAsync();
             if (lastDate == null)
             {
                 var dailyCounter = new DailyCounter { ServiceName = cleanService, Day = DateTime.Today, Counter = 1 };
