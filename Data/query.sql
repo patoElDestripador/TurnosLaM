@@ -30,7 +30,8 @@ CREATE TABLE Patients (
     Gender ENUM('Hombre', 'Mujer', 'Otro'),
     Address VARCHAR(255),
     PhoneNumber VARCHAR(20),
-    Eps VARCHAR(20)
+    Eps VARCHAR(20),
+    CreationDate DATETIME
 );
 
 CREATE TABLE Services (

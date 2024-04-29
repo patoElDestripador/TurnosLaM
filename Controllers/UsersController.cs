@@ -30,7 +30,7 @@ namespace TurnosLaM.Controllers{
     }
     public IActionResult ShiftQueue()
     {
-        return View( _context.Queues.Where(q => q.Status == "En espera").OrderBy(q => q.CreationDate).Take(10).ToList());
+        return View( _context.Queues.Where(q => q.Status == "En espera").OrderBy(q => q.CreationDate).Take(6).ToList());
     }
 
 }
