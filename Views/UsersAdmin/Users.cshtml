@@ -1,0 +1,53 @@
+
+@{
+    ViewBag.Title ="Usuarios";
+    var usersMod = ViewData["users"] as List<UserModify>;
+}
+<div class="containerEmployees">
+    <div class="title d-flex justify-content-center">
+        <h1>Usuarios</h1>
+    </div>
+    <div class="table">
+        <table  class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    @* <th>Empleado Id</th> *@
+                    <th>Nombre de usuario</th>
+                    <th>Rol</th>
+                    <th>Modulo</th>
+                    <th>Estado</th>
+                    <th>Skills</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Users in usersMod){
+                    <tr>
+                        <td>@Users.Id</td>
+                        @* <td>@Users.EmployeesId</td> *@
+                        <td>@Users.UserName</td>
+                        <td>@Users.Role</td>
+                        <td>@Users.Module</td>
+                        <td>@Users.Status</td>
+                      <form action="ChangeSkill","UsersAdmin" method="post">
+                          <td>
+                            <input type="checkbox" name="Skill1" id="Checkbox_Am" value="@Users.Skills1">
+                            <label class="form-check-label">Am</label> @*Am= Autorización de Medicamentos*@
+
+                            <input type="checkbox" name="Skill2" id="Checkbox_Pf" value=@Users.Skills2>
+                            <label class="form-check-label">Pf</label> @*Pf= pago de Facturas*@
+
+                            <input type="checkbox" name="Skill3" id="Checkbox_Inf" value="@Users.Skills3">
+                            <label class="form-check-label">Inf</label> @*Inf= Información general*@
+
+                            <input type="checkbox"name="Skill4" id="Checkbox_Cm" value="@Users.Skills4">
+                            <label class="form-check-label">Cm</label> @*Cm= Citas Medicas*@
+                            <button class="btn btn-sm btn-primary" type="submit">Enviar</button>
+                        </td>
+                      </form>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

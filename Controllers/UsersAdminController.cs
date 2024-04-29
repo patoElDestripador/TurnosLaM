@@ -5,12 +5,16 @@ using TurnosLaM.Models;
 using Microsoft.AspNetCore.Authentication;
 using TurnosLaM.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.Xml;
+using System;
 
 namespace TurnoLaM.Controllers;
 
 public class UsersAdminController : Controller
 {
     public readonly BaseContext _context;
+    private object employee;
+
     public UsersAdminController(BaseContext context)
     {
         _context = context;
@@ -25,6 +29,28 @@ public class UsersAdminController : Controller
     public IActionResult Shifts()
     {
         return View( _context.Shifts.ToList()); //Cuando tenga problemas que aparentemente no son problemas, detener el Endpoint y eliminar el bing
+    }
+    //Creamos una vista de usuarios 
+    public async Task<IActionResult> Users()
+    {
+        var users = await _context.Users.ToListAsync();
+        List<UserModify> allUsers = new List<UserModify>();;
+        foreach (var user in users){
+            string[] skills = user.Skills.Split(',');
+            UserModify userM = new UserModify(){
+                UserName = user.UserName,
+                Role = user.Role,
+                Module = user.Module,
+                Status = user.Status,
+                Skills1 = String.IsNullOrEmpty(skills[0]) ? "true" :"false", 
+                Skills2 = String.IsNullOrEmpty(skills[1]) ? "true" :"false", 
+                Skills3 = String.IsNullOrEmpty(skills[2]) ? "true" :"false", 
+                Skills4 = String.IsNullOrEmpty(skills[3]) ? "true" :"false", 
+            };
+            allUsers.Add(userM);
+        };
+        ViewData["users"] = allUsers;
+        return View ();
     }
     //Agregamos la tabla employees (Empleados)
     public async Task<IActionResult> Employees()
@@ -42,7 +68,7 @@ public class UsersAdminController : Controller
     //Agregamos el aparatado  ChangeSkill (cambiar la skill) Agregamos un nuevo parametro, en este caso la <T> me sirve para Actualizar skills 
         public async Task<IActionResult> ChangeSkill<T>(int? id, T skills)
     {
-        //Agregamos la variable para guardar el id
+        //Agregamos la variable para guardar el id de las skills
         var userId =id;
         //Agregamos la condición para cambiar y agregar las skill del UserAgent 
         //Agregar la condicón y agregar los campos de las skills
@@ -53,22 +79,6 @@ public class UsersAdminController : Controller
 
 
         
-    }
-
-    [HttpPost]
-    public IActionResult ChangeSkills(FormCollection form)
-    {
-        //List<string> lo que hago en esta linea es listar los checkbox que tengo
-        List<string>SelectedSkill = new List<string>();
-        foreach (string key  in form.Keys) //Iteramos sobre las llaves del formulario donde tengo mis checkbox
-        {
-            if(form[key] == "on")
-            {   //Si la skill es seleccionada la añadimos a la lista de SelectedSkill
-                SelectedSkill.Add(key);
-            }
-        }
-        return View("Employess");
-        //Implementar Un modelo de manera de actulizar a la base de datos y ¿Una vista o un Sweet alert de confirmación?
     }
 
 }

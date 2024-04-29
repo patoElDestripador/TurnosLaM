@@ -9,6 +9,13 @@ CREATE TABLE Employees (
     PhoneNumber VARCHAR(20),
     Status ENUM('Active', 'Disabled', 'Vacation')
 );
+--MTO= Intente cambiar la base de datos agregando los campos necesarios. 
+ALTER TABLE Employees 
+ADD Skill1 BOOLEAN DEFAULT FALSE,
+ADD Skill2 BOOLEAN DEFAULT FALSE,
+ADD Skill3 BOOLEAN DEFAULT FALSE,
+ADD Skill4 BOOLEAN DEFAULT FALSE;
+--Me dan problemas a la hora de actualizar la tabla para guardar las habilidades.
 
 CREATE TABLE Users (
     Id INT PRIMARY KEY AUTO_INCREMENT,

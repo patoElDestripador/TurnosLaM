@@ -18,10 +18,13 @@ namespace TurnosLaM.Data
         public DbSet<Service> Services { get; set; }
         public DbSet<ShiftModel> Shifts { get; set; }
         public DbSet<User> Users { get; set; }
+        //Mto Agregamos el Modelo de CreateEmployess 
+        public DbSet<CreateEmployee> CreateEmployees { get; set; }
         public DbSet<DailyCounter> DailyCounters { get; set; }
         public DbSet<QueueToReassign> ViewQueueToReassign { get; set; }
 
     }
+    
     
 
 }

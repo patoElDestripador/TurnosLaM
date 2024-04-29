@@ -6,6 +6,9 @@ using TurnosLaM.Data;
 using TurnosLaM.Models;
 using TurnosLaM.Models;
 using TurnosLaM.Helpers;
+using TurnosLaM.Models;
+using TurnosLaM.Models;
+using TurnosLaM.Helpers;
 
 
 namespace TurnosLaM.Controllers
@@ -78,7 +81,8 @@ namespace TurnosLaM.Controllers
                 Password = EncriptedPassword,
                 Role = employee.Role,
                 Status = "LogOut",
-                Skills = $"{Skill_1}, {Skill_2}, {Skill_3}, {Skill_4}"
+                //MTO= En esta linea cambio las skills (Hablilidades) de un tipo de dato a otro. en este caso de Bool a String, como nos decia andres ayer (Opreador ternario)
+                Skills = $"{(employee.Skill1 ? "Am" :"null")}, {(employee.Skill2 ? "Pf" :"null")},{(employee.Skill3 ? "Inf" : "null")},{(employee.Skill4 ? "Cm" : "null")}"
             };
             // Agrega el objeto al modelo:
             _context.Users.Add(user);
@@ -88,71 +92,8 @@ namespace TurnosLaM.Controllers
             // Redirecciona a la tabla de 'Empleados':
             return RedirectToAction("Employees", "UsersAdmin");
         }
-        // ----------------- PANEL VIEW:
-        // public async Task<IActionResult> IndexPrueba()
-        // {
-        //     // Se trae el siguiente turno en cola:
-        //     var queue = await _context.Queues.FirstOrDefaultAsync();
-        //     // Se busca el turno que está asociado:
-        //     var shift = await _context.Shifts.FindAsync(queue.ShiftId);
-        //     // Se busca el usuario que esté asociado con el turno:
-        //     var patient = await _context.Patients.FindAsync(shift.PatientId);
-
-        //     // Se confirma si el siguiente turno en cola no ha sido atendido:
-        //     if(queue.Status == "En espera")
-        //     {
-        //         return View(patient);
-        //     }
-
-
-
-        //     if (queue != null && patient != null && service != null)
-        //     {
-        //         var Pacientqueue = new Pacientqueue
-        //         {
-        //             FirstName = patient.FirstName,
-        //             LastName = patient.LastName,
-        //             Document = patient.Document,
-        //             AssignedShift = queue.AssignedShift,
-        //             Calls = queue.Calls,
-        //             ServiceName = service.ServiceName,
-        //             Id = patient.Id
-        //         };
-
-        //         return View(Pacientqueue);
-        //     }
-
-        //     // Si no se encuentran registros en alguna de las tablas, devolver null o algún otro manejo apropiado
-        //     return View(null);
-        // }
-
-
-        /*         public async Task<ActionResult> MarcarLlamado(int id)
-                {
-                    var assignedShift = await _context.Queues.FindAsync(id); // Encontrar el turno en la base de datos
-                    if (assignedShift != null)
-                    {
-                        TempData["MessageSuccess"] = $"Llamado #{assignedShift.Calls + 1}";
-
-                        if (assignedShift.Calls == 2)
-                        {
-                            assignedShift.Status = "En espera";
-                            assignedShift.AssignmentTime = DateTime.Now; // Guarda la hora de inicio para el temporizador
-                            await _context.SaveChangesAsync(); // Guardar los cambios en la base de datos
-                        }
-                        else if (assignedShift.Calls >= 3)
-                        {
-                            assignedShift.Status = "Ausente";
-                            await _context.SaveChangesAsync(); // Guardar los cambios en la base de datos
-                        }
-                        else
-                        {
-                            assignedShift.Calls++;
-                            await _context.SaveChangesAsync(); // Guardar los cambios en la base de datos
-                        }
-                    }
-                    return RedirectToAction("Index"); // Redirigir a la lista de turnos
-                }  */
+// ----------------- PANEL VIEW:
+    
 
         public async Task<ActionResult> IncrementarCalls(int id)
         {

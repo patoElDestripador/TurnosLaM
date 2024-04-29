@@ -14,6 +14,7 @@ namespace TurnosLaM.Models
         public string? Password { get; set; }
         public DateTime CreationTime { get; set; }
         public string? Role { get; set; }
+        //Se agregan las habilidades de los usuarios
         public bool Skill1 { get; set; }
         public bool Skill2 { get; set; }
         public bool Skill3 { get; set; }
