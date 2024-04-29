@@ -7,6 +7,7 @@ using TurnosLaM.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.Xml;
 using System;
+using TurnosLaM.Helpers;
 
 namespace TurnoLaM.Controllers;
 
@@ -64,7 +65,6 @@ public class UsersAdminController : Controller
     }
 
     //Creamos la vista para cambiar skill
- 
     //Agregamos el aparatado  ChangeSkill (cambiar la skill) Agregamos un nuevo parametro, en este caso la <T> me sirve para Actualizar skills 
         public async Task<IActionResult> ChangeSkill<T>(int? id, T skills)
     {
@@ -73,12 +73,101 @@ public class UsersAdminController : Controller
         //Agregamos la condición para cambiar y agregar las skill del UserAgent 
         //Agregar la condicón y agregar los campos de las skills
 
-      
         return View(await _context.Users.FindAsync(id));
         //¿Agregamos el cambio de Skill?
 
 
         
+    }
+
+    [HttpPost]
+    public IActionResult ChangeSkills(FormCollection form)
+    {
+        //List<string> lo que hago en esta linea es listar los checkbox que tengo
+        List<string>SelectedSkill = new List<string>();
+        foreach (string key  in form.Keys) //Iteramos sobre las llaves del formulario donde tengo mis checkbox
+        {
+            if(form[key] == "on")
+            {   //Si la skill es seleccionada la añadimos a la lista de SelectedSkill
+                SelectedSkill.Add(key);
+            }
+        }
+        return View("Employess");
+        //Implementar Un modelo de manera de actulizar a la base de datos y ¿Una vista o un Sweet alert de confirmación?
+    }
+
+
+
+     // ----------------- CREATE VIEW:
+    public IActionResult Create()
+    {
+        return View();
+    }
+    // ----------------- CREATE ACTION:
+    [HttpPost]
+    public async Task<IActionResult> Create(CreateEmployee employee)
+    {
+        // Se instancia un objeto del modelo 'Employee' para insentar los datos necesarios al modelo:
+        Employee NewEmployee = new Employee()
+        {
+            FirstName = employee.FirstName,
+            LastName = employee.LastName,
+            Email = employee.Email,
+            PhoneNumber = employee.PhoneNumber,
+            Status = employee.Status,
+            CreationDate = DateTime.Now
+        };
+        // Agrega el objeto al modelo:
+        _context.Employees.Add(NewEmployee);
+        // Guardar los cambios de DbSet en la db:
+        await _context.SaveChangesAsync();
+        //------------------------------------------------------
+        // Se inicializa una variable para encriptar la contraseña utilizando el método 'EncryptPassword' de la clase (TheHelpercito):
+        var EncriptedPassword = TheHelpercito.EncryptPassword(employee.Password);
+        // Se inicializa una variable con el último usuario creado para asociarlo con el modelo 'User':
+        var lastEmployee = await _context.Employees.OrderByDescending(e => e.CreationDate).FirstOrDefaultAsync();
+        // Se inicializa una variable para generar el 'UserName' con el método 'GenerateUserName' de la clase (TheHelpercito):
+        // string UserName = TheHelpercito.GenerateUserName(employee.FirstName, employee.LastName, employee.PhoneNumber);
+        // Se inicializan las variables de las skills con un valor por defecto:
+        var Skill_1 = "null";
+        var Skill_2 = "null";
+        var Skill_3 = "null";
+        var Skill_4 = "null";
+        // Se confirma si el usuario ha seleccionado el 'Checkbox' para asignarle su valor:
+        if (employee.Skill1)
+        {
+            Skill_1 = "AM";
+        }
+        if (employee.Skill2)
+        {
+            Skill_2 = "PF";
+        }
+        if (employee.Skill3)
+        {
+            Skill_3 = "INF";
+        }
+        if (employee.Skill4)
+        {
+            Skill_4 = "CM";
+        }
+        // Se instancia un objeto del modelo 'User' para setear la información en el modelo correctamente:
+        var user = new User()
+        {
+            EmployeesId = lastEmployee.Id,
+            UserName = employee.FirstName,
+            Password = EncriptedPassword,
+            Role = employee.Role,
+            Module = employee.Module,
+            Status = "LogOut",
+            Skills = $"{Skill_1}, {Skill_2}, {Skill_3}, {Skill_4}"
+        };
+        // Agrega el objeto al modelo:
+        _context.Users.Add(user);
+        // Guardar los cambios de DbSet en la db:
+        await _context.SaveChangesAsync();
+        //------------------------------------------------------
+        // Redirecciona a la tabla de 'Empleados':
+        return RedirectToAction("Employees", "UsersAdmin");
     }
 
 }

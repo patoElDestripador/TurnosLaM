@@ -29,7 +29,7 @@ function hola() {
 function shiftNotifier(ShiftNumber) {
   Swal.fire({
     title: `Turno ${ShiftNumber}`,
-    text: "Este es tu turno, En breve un asesor te llamara!!",
+    text: "¡Turno asignado. En breve un asesor te llamará!",
     icon: "success"
   });
 }

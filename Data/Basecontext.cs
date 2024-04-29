@@ -22,9 +22,6 @@ namespace TurnosLaM.Data
         public DbSet<CreateEmployee> CreateEmployees { get; set; }
         public DbSet<DailyCounter> DailyCounters { get; set; }
         public DbSet<QueueToReassign> ViewQueueToReassign { get; set; }
-
+        public DbSet<Pacientqueue> Pacientqueues { get; set; }
     }
-    
-    
-
 }

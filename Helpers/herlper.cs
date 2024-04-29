@@ -9,9 +9,6 @@ using Newtonsoft.Json;
 using BCryptNet = BCrypt.Net.BCrypt;
 using System;
 
-
-
-
 namespace TurnosLaM.Helpers
 {
     public  class TheHelpercito

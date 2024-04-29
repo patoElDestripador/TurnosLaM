@@ -1,6 +1,7 @@
 @{
-    ViewBag.Title ="Empleados";
+    ViewBag.Title ="Empleados - MSC";
 }
+
 <div class="containerEmployees">
     <div class="title d-flex justify-content-center">
         <h1>Empleados</h1>
@@ -27,9 +28,9 @@
                         <td>@Employee.Email</td>
                         <td>@Employee.PhoneNumber</td>
                         <td>@Employee.Status</td>
-                        <form action="@Url.Action("ChangesSkills","UsersAdmin")" method="post">
-                        <td>
-                            <input type="checkbox">
+                      <form action="@Url.Action("ChangeSkills","UsersAdmin")" method="post">
+                          <td>
+                            <input type="checkbox" name="Am" id="Checkbox_Am">
                             <label class="form-check-label">Am</label> @*Am= Autorización de Medicamentos*@
 
                             <input type="checkbox">
@@ -42,8 +43,8 @@
                             <label class="form-check-label">Cm</label> @*Cm= Citas Medicas*@
                             <button class="btn btn-sm btn-primary" type="submit">Enviar</button>
                         </td>
-                      </form>
-                    </tr>
+                    </form>
+                </tr>
                 }
             </tbody>
         </table>

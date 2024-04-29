@@ -26,7 +26,7 @@
                         <input type="text" class="form-control" aria-describedby="Document" id="Document" asp-for="Document">
                     </div>
                     <div class="row mb-3">
-                        <div class="col-3">
+                        <div class="col-3 mb-3">
                             <label class="form-label">Turno</label>
                             <input type="text" class="form-control" id="AssignedShift" aria-describedby="Turno" asp-for="AssignedShift" >
                         </div>
@@ -34,23 +34,23 @@
                             <label class="form-label">Eps</label>
                             <input type="text" class="form-control" aria-describedby="Turno" id="Eps" asp-for="Eps" >
                         </div>
-                        <div class="col-9">
-                            <label class="form-label">Servicio</label>
-                            <input type="text" class="form-control" id="ServiceName" asp-for="ServiceName" aria-describedby="Servicio">
-                        </div>
-                        <div class="col-9">
-                            <label class="form-label">Address</label>
-                            <input type="text" class="form-control" aria-describedby="Servicio" id="Address" asp-for="Address">
-                        </div>
-                        <div>
-                            <select class="form-select mt-5" id="Gender" asp-for="Gender">
+                        <div class="col-3" style="margin-top: 30px;">
+                            <select class="form-select" id="Gender" asp-for="Gender">
                                 <option value="">Género</option>
                                 <option value="Masculino">Masculino</option>
                                 <option value="Femenino">Femenino</option>
                                 <option value="other">Otro</option>
                             </select>
                         </div>
-                        <div class="col-9">
+                        <div class="col-9 mb-3">
+                            <label class="form-label">Servicio</label>
+                            <input type="text" class="form-control" id="ServiceName" asp-for="ServiceName" aria-describedby="Servicio">
+                        </div>
+                        <div class="col-5">
+                            <label class="form-label">Address</label>
+                            <input type="text" class="form-control" aria-describedby="Servicio" id="Address" asp-for="Address">
+                        </div>
+                        <div class="col-5">
                             <label class="form-label">Teléfono</label>
                             <input type="text" class="form-control" aria-describedby="Servicio"  id="PhoneNumber" asp-for="PhoneNumber">
                         </div>
@@ -69,25 +69,29 @@
                     {
                         @if (Model.Calls == 0)
                         {
-                            <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.Id">Primer Llamado</a>
-                            <a onclick="marcarSiguiente()" class="btn btn-primary mt-2 p-4">Siguiente paciente</a>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Primer Llamado</a>
                         }
                         else if (Model.Calls == 1)
                         {
-                            <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.Id">Segundo Llamado</a>
-                            <a onclick="marcarSiguiente()" class="btn btn-primary mt-2 p-4">Siguiente paciente</a>
+                            <a class="btn btn-warning mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Segundo llamado</a>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
                         }
-                        else if (Model.Calls == 2)
+                        else if(Model.Calls == 2)
+                        {
+                            <a class="btn btn-danger mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Tercer llamado</a>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
+                        }
+                        else if (Model.Calls == 3)
                         {
                             <script>
                                 setTimeout(function() {
                                     // Después de 20 segundos, si el estado sigue siendo "En espera", se marca como "Ausente"
                                     if ('@Model.Status' === 'En espera') {
-                                        marcarAusente('@Model.Id');
+                                        marcarAusente('@Model.QueueId');
                                     }
                                 }, 20000);
                             </script>
-                            <a onclick="marcarSiguiente()" class="btn btn-primary mt-2 p-4">Siguiente paciente</a>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
                         }
                     }
             </div>
