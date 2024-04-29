@@ -20,8 +20,7 @@ namespace TurnosLaM.Data
         public DbSet<User> Users { get; set; }
         public DbSet<DailyCounter> DailyCounters { get; set; }
         public DbSet<QueueToReassign> ViewQueueToReassign { get; set; }
-
+        public DbSet<Pacientqueue> Pacientqueues { get; set; }
     }
-    
 
 }

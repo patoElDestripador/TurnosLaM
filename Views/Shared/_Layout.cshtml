@@ -15,38 +15,6 @@
 </head>
 
 <body>
-    @* <header class="p-2 mb-3 border-bottom">
-        <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <h3 class="justify-content-start"><a class="text-decoration-none text-dark" asp-controller="Home"
-                        asp-action="Index">TurnosLaM</a></h3>
-
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-secondary">Turnos</a></li>
-                    <li><a href="#" class="nav-link px-2 text-secondary">Empleados</a></li>
-                    <li><a href="#" class="nav-link px-2 text-secondary">Cola</a></li>
-                    <li><a href="#" class="nav-link px-2 text-secondary">Crear Turno</a></li>
-                </ul>
-
-
-                <div class="dropdown text-end">
-                        <div class="flex-shrink-1 dropdown">
-                            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                            </a>
-                            <ul class="dropdown-menu text-small shadow">
-                                <li><button class="dropdown-item" onclick="hola()">Perfil</button></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a asp-controller="" asp-action="" class="dropdown-item">Cerrar sesión</a></li>
-                            </ul>
-                        </div>
-                </div>
-            </div>
-        </div>
-    </header> *@
     @* NAVBAR *@
     <div class="row mb-5">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -57,40 +25,47 @@
                 <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#library-menu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="library-menu">
-                    <ul class="navbar-nav nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link fs-4" asp-area="" asp-controller="UsersAdmin" asp-action="Index">Panel</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fs-4" asp-area="" asp-controller="UsersAdmin" asp-action="Shifts">Turnos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fs-4" asp-area="" asp-controller="UsersAdmin" asp-action="Employees">Empleados</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fs-4" asp-area="" asp-controller="UsersAdmin" asp-action="Queues">Cola</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="dropdown text-end">
-                    <div class="flex-shrink-1 dropdown">
-                        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://media.istockphoto.com/id/1533834784/es/vector/s%C3%ADmbolo-icono-de-personas-gr%C3%A1ficos-vectoriales.jpg?s=1024x1024&w=is&k=20&c=3Mo767fBv8Pcj-LEg5bYAvleOCafSR3hd970529xK3Q=" alt="Logo perfil" width="42" height="42" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small shadow">
-                            <li>
-                                <button class="dropdown-item fs-4" onclick="hola()">Perfil</button></li>
-                            <li>
-                                <hr class="dropdown-divider">
+                @{
+                    string pageTitle = ViewData["Title"].ToString();
+                }
+                @if(pageTitle == "Registrar - MSC" || pageTitle == "Empleados - MSC" || pageTitle == "Panel - MSC" || pageTitle == "Colas - MSC" || pageTitle == "Turnos - MSC"){
+                    <div class="collapse navbar-collapse" id="library-menu">
+                        <ul class="navbar-nav nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link fs-4" asp-area="" asp-controller="UsersAdmin" asp-action="Index">Panel</a>
                             </li>
-                            <li>
-                                <a asp-controller="" asp-action="" class="dropdown-item fs-4">Cerrar sesión</a>
+                            <li class="nav-item">
+                                <a class="nav-link fs-4" asp-area="" asp-controller="UsersAdmin" asp-action="Shifts">Turnos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fs-4" asp-area="" asp-controller="UsersAdmin" asp-action="Employees">Empleados</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link fs-4" asp-area="" asp-controller="UsersAdmin" asp-action="Queues">Cola</a>
                             </li>
                         </ul>
                     </div>
-                </div>
+                }
+                @if(pageTitle != "Login"){
+                    <div class="dropdown text-end">
+                        <div class="flex-shrink-1 dropdown">
+                            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://media.istockphoto.com/id/1533834784/es/vector/s%C3%ADmbolo-icono-de-personas-gr%C3%A1ficos-vectoriales.jpg?s=1024x1024&w=is&k=20&c=3Mo767fBv8Pcj-LEg5bYAvleOCafSR3hd970529xK3Q=" alt="Logo perfil" width="42" height="42" class="rounded-circle">
+                            </a>
+                            <ul class="dropdown-menu text-small shadow">
+                                <li>
+                                    <button class="dropdown-item fs-4" onclick="hola()">Perfil</button></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a asp-controller="Home" asp-action="Logout" class="dropdown-item fs-4">Cerrar sesión</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
             </div>
         </nav>
     </div>
