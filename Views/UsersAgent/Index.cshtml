@@ -70,14 +70,18 @@
                         @if (Model.Calls == 0)
                         {
                             <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Primer Llamado</a>
-                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
                         }
                         else if (Model.Calls == 1)
                         {
-                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Segundo Llamado</a>
+                            <a class="btn btn-warning mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Segundo llamado</a>
                             <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
                         }
-                        else if (Model.Calls == 2)
+                        else if(Model.Calls == 2)
+                        {
+                            <a class="btn btn-danger mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Tercer llamado</a>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
+                        }
+                        else if (Model.Calls == 3)
                         {
                             <script>
                                 setTimeout(function() {

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace TurnosLaM.Controllers;
-//[TheGuardcito]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -104,31 +103,4 @@ public class HomeController : Controller
         HttpContext.Session.Remove("UserId");
         return RedirectToAction("Index");
     }
-
-    // ----------------- DELETE ACTION:
-    // 4. ELIMINAR:
-    // public async Task<IActionResult> Eliminar(int id)
-    // {
-    //     // Se inicializa una variable con la variable de sesión:
-    //     var SessionId = Int32.Parse(HttpContext.Session.GetString("EmpleadoId"));
-    //     // Se busca el registro que coincida con el 'id' en el modelo 'empleado':
-    //     var empleado = await _context.Empleados.FindAsync(id);
-    //     // Una vez encontrado, se elimina ese registro del modelo:
-    //     _context.Empleados.Remove(empleado);
-    //     // Se actualiza la base de datos:
-    //     await _context.SaveChangesAsync();
-    //     // Se confirma si el usuario eliminado es el mismo que está en la variable de sesión:
-    //     if(id == SessionId)
-    //     {
-    //         // Si es así, se eliminan las variables de sesión (Logout action):
-    //         HttpContext.Session.Remove("Email");
-    //         HttpContext.Session.Remove("Nombre");
-    //         HttpContext.Session.Remove("EmpleadoId");
-    //         return RedirectToAction("Index", "Empleados");
-    //     }
-    //     else
-    //     {
-    //         return RedirectToAction("PanelEmployees", "Empleados");
-    //     }
-    // }
 }
