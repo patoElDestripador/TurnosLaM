@@ -1,9 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+using TurnosLaM.Data;
+
 namespace TurnosLaM.Models
 {
     public class Queue
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public int ShiftId { get; set; }
         public string? Status { get; set; }
         public string? AssignedShift { get; set; }
@@ -11,5 +14,7 @@ namespace TurnosLaM.Models
         public DateTime? AssignmentTime { get; set; }
         public DateTime? ClosingTime { get; set; }
         public int? Calls { get; set; }
-    }//MTO= Cambie  las lineas de Status y de llamadas a Enum e Int (Antes estaban Como string y DateTime)
+        
+    }
+    
 }

@@ -1,4 +1,3 @@
-using TurnosLaM.Data;
 namespace TurnosLaM.Models
 {
     public class ShiftModel

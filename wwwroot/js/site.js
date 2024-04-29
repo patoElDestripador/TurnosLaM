@@ -38,7 +38,7 @@ function shiftNotifier(ShiftNumber) {
 function documentNotFound(Document) {
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
-      confirmButton: "btn btn-success",
+      confirmButton: "btn btn-success ms-4",
       cancelButton: "btn btn-info"
     },
     buttonsStyling: false
@@ -55,6 +55,7 @@ function documentNotFound(Document) {
   }).then((result) => {
     if (result.isConfirmed) {
         //generar el turno
+        this.submit(); 
       }
   });
 
@@ -74,9 +75,9 @@ function notificationToMissionController(message) {
 //esta funcion solo sirve en una direccion 
 //si requieren una respuesta...
 //consiguren la de uds 
-function sendRequestToController(Controller,method,methodType = "GET",params = "") {
+function sendRequestToController(Controller,method,methodType = "GET") {
   var xhr = new XMLHttpRequest();
-  xhr.open(methodType, `/${Controller}/${method}/${params}`, true);
+  xhr.open(methodType, `/${Controller}/${method}`, true);
   xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status < 300) {
           console.log(xhr.responseText);
@@ -86,3 +87,5 @@ function sendRequestToController(Controller,method,methodType = "GET",params = "
   };
   xhr.send();
 }
+
+

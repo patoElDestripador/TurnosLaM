@@ -6,6 +6,8 @@ using TurnosLaM.Data;
 using TurnosLaM.Models;
 using TurnosLaM.Helpers;
 using Newtonsoft.Json;
+using BCryptNet = BCrypt.Net.BCrypt;
+using System;
 
 
 
@@ -22,7 +24,7 @@ namespace TurnosLaM.Helpers
             _httpContextAccessor = httpContextAccessor;
         }
 
-       public static string GenerateUserName(string FirstName, string LastName, string Document)
+        public static string GenerateUserName(string FirstName, string LastName, string Document)
         {
             string cleanFirstName = FirstName.Trim().ToLower();
             string cleanLastName = LastName.Trim().ToLower();
@@ -30,18 +32,22 @@ namespace TurnosLaM.Helpers
             string username = $"{cleanFirstName[0]}{cleanLastName}{cleanDocument.Substring(cleanDocument.Length - 2)}";
             return username;
         }
-        public static string Encrypt(string encrypt)
+        // 1.MÉTODO: Encripta la contraseña:
+        public static string EncryptPassword(string password)
         {
-            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(encrypt);
-            string result = Convert.ToBase64String(encryted);
-            return result;
+            // Se inicializa una variable de la password encriptada con el método (HashPassword):
+            string EncryptedPassword = BCryptNet.HashPassword(password, BCryptNet.GenerateSalt());
+            // Se retorna la password encriptada:
+            return EncryptedPassword;
         }
 
-        public static string Decrypt(string decrypt)
+        // 2.MÉTODO: Compara la contraseña enviada por el usuario en el Login con la contraseña encriptada guardada en la base de datos:
+        public static bool VerifyPassword(string dataBasePassword, string passwordProvided)
         {
-            byte[] decryted = Convert.FromBase64String(decrypt);
-            string result =  System.Text.Encoding.Unicode.GetString(decryted);
-            return result;
+            // Se iniciaiza una variable para confirmar si la contraseña proporcionada coincide con la guardada en la base de datos con el método (Verify):
+            bool passwordMatch = BCryptNet.Verify(passwordProvided, dataBasePassword);
+            // Se retorna la variable confirmando si la contraseña coincidió:
+            return passwordMatch;
         }
 
         public void SetObjInSession<T>(string nameToSave, T obj){ 
@@ -49,8 +55,11 @@ namespace TurnosLaM.Helpers
         }
 
         public T getObjInSession<T>(string name){ 
-           return JsonConvert.DeserializeObject<T>(_httpContextAccessor.HttpContext.Session.GetString(name));
+            return JsonConvert.DeserializeObject<T>(_httpContextAccessor.HttpContext.Session.GetString(name));
         }
+
+
+
     }
 }
 

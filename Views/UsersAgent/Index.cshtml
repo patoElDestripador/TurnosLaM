@@ -1,6 +1,6 @@
-@{
-    ViewData["Title"] = "Panel agente";
-}
+
+ 
+ @model Pacientqueue;
 
 <div class="row">
     <div class="col-7 d-flex align-items-center" style="height: 75vh;">
@@ -11,29 +11,47 @@
             <div class="card-body shadow-sm">
                 <form method="post">
                     <div class="mb-3">
-                        <label class="form-label">Nombre:</label>
-                        <input type="text" class="form-control" aria-describedby="Nombre">
+                        <label class="form-label" >Nombre:</label>
+                        <input type="text" class="form-control"  for aria-describedby="Nombre" value="@Model.FirstName">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Apellidos</label>
-                        <input type="text" class="form-control" aria-describedby="Apellidos">
+                        <label class="form-label" >Apellidos</label>
+                        <input type="text" value="@Model.LastName" class="form-control" aria-describedby="Apellidos">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Documento</label>
-                        <input type="text" class="form-control" aria-describedby="Documento de identidad">
+                        <label class="form-label" ></label>Documento</label>
+                        <input type="text" class="form-control" aria-describedby="Documento de identidad" value="@Model.Document">
                     </div>
-                    <div class="mb-3">
+@*                     <div class="mb-3">
                         <label class="form-label">EPS</label>
                         <input type="text" class="form-control" aria-describedby="EPS">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Dirección</label>
+                        <input type="text" class="form-control" aria-describedby="Dirección">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-8 mt-3">
+                            <label class="form-label">Teléfono</label>
+                            <input type="number" class="form-control" aria-describedby="Teléfono">
+                        </div>
+                        <div class="col-4 mt-5">
+                            <select class="form-select">
+                                <option value="" selected disabled>Género</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                                <option value="O">Otro</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-3">
                             <label class="form-label">Turno</label>
-                            <input type="text" class="form-control" aria-describedby="Turno">
+                            <input type="text" class="form-control" aria-describedby="Turno" disabled>
                         </div>
                         <div class="col-9">
                             <label class="form-label">Servicio</label>
-                            <input type="text" class="form-control" aria-describedby="Servicio">
+                            <input type="text" class="form-control" aria-describedby="Servicio" disabled>
                         </div>
                     </div>
                     <div class="mt-4 d-flex justify-content-center">
@@ -56,6 +74,24 @@
                         <label class="form-label">EPS</label>
                         <input type="text" class="form-control" aria-describedby="EPS" value="###" disabled>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Dirección</label>
+                        <input type="text" class="form-control" aria-describedby="Dirección" value="###" disabled>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-8 mt-3">
+                            <label class="form-label">Teléfono</label>
+                            <input type="number" class="form-control" aria-describedby="Teléfono" value="###" disabled>
+                        </div>
+                        <div class="col-4 mt-5">
+                            <select class="form-select" disabled>
+                                <option value="" selected disabled>Género</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                                <option value="O">Otro</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="row mb-3">
                         <div class="col-3">
                             <label class="form-label">Turno</label>
@@ -69,19 +105,76 @@
                     <div class="mt-4 d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary mt-2">Guardar</button>
                     </div> *@
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <label class="form-label">Turno</label>
+                            <input type="text" class="form-control" value="@Model.AssignedShift"
+                             aria-describedby="Turno">
+                        </div>
+                        <div class="col-9">
+                            <label class="form-label">Servicio</label>
+                            <input type="text" class="form-control" aria-describedby="Servicio" value="@Model.ServiceName" >
+                        </div>
+                    </div>
+                    <div class="mt-4 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
     <div class="col-5 border shadow-sm" style="height: 75vh;">
         <div class="row d-flex justify-content-center mt-5">
-            <div class="col-12 d-flex justify-content-center">
-                <a href="#" class="btn btn-primary mt-2 p-4">Siguiente turno</a>
-            </div>
+@*             <div class="col-12 d-flex justify-content-center">
+                <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="MarcarLlamado" >llamar paciente</a>
+            </div> *@
         </div>
         <div class="row d-flex justify-content-center mt-5">
             <div class="col-12 d-flex justify-content-center">
-                <a href="#" class="btn btn-warning mt-2 p-4">Turno ausente</a>
+                @if (Model != null)
+                        {
+                            
+
+                                @if (Model.Calls == 0)
+                                {
+                                    <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.Id">Primer Llamado</a>
+                                    
+                                
+                                }
+                                else if (Model.Calls == 1)
+                                {
+                                    <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.Id">Segundo Llamado</a>
+                                }
+                                else if (Model.Calls == 2)
+                                {
+                                    <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.Id">Tercer Llamado</a>
+                                    <script>
+                                        setTimeout(function() {
+                                            // Después de 20 segundos, si el estado sigue siendo "En espera", se marca como "Ausente"
+                                            if ('@Model.Status' === 'En espera') {
+                                                marcarAusente('@Model.Id');
+                                            }
+                                        }, 20000);
+                                    </script>
+                                    <a onclick="marcarSiguiente()" class="btn btn-primary mt-2 p-4">Siguiente paciente</a>
+                                }
+                                
+                            
+                        }else
+{
+    <!-- Coloca aquí el contenido que deseas mostrar cuando el modelo sea nulo -->
+    <div>
+        <p>El modelo es nulo.</p>
+
+
+
+
+
+
+
+        
+    </div>
+}
             </div>
         </div>
         <div class="row d-flex justify-content-center mt-5">
@@ -102,3 +195,4 @@
         </div>
     </div>
 </div>
+-
