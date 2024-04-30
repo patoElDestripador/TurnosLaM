@@ -22,9 +22,8 @@ namespace TurnosLaM.Controllers
         // ----------------- INCREMENT CALLS:
         public async Task<ActionResult> IncrementarCalls(int id)
         {
-            //funcion que llame a el turno 
+            
             var pacient = await _context.Queues.FindAsync(id);
-            TempData["MessageCall"] = $"${pacient.AssignedShift}";
             if (pacient != null)
             {
                 pacient.Calls = pacient.Calls + 1;
@@ -55,17 +54,17 @@ namespace TurnosLaM.Controllers
                 // Si el asesor ha realizado llamados, se asigna el mismo paciente:
                 queue = await _context.Queues.FindAsync(idPrueba);
             }
-            // Se haya el paciente relacionado con el 'UsersId' del turno en cola:
-            var patient = await _context.Patients.FindAsync(queue.UserId);
-            // Se haya el turno relacionado con el 'ShiftId' del turno en cola:
-            var shift = await _context.Shifts.FindAsync(queue.ShiftId);
-            // Se haya el servicio relacionado con el 'ServiceId' del turno en cola:
-            var service = await _context.Services.FindAsync(shift.ServiceId);
-            // Se inicializa variable confirmando si el paciente está registrado?????????:
-            var isRegistered = await IsPatientRegistered();
             // Condicional confirmando si las variables no son nulas:
-            if (queue != null && patient != null && service != null)
+            if (queue != null)
             {
+                // Se haya el turno relacionado con el 'ShiftId' del turno en cola:
+                var shift = await _context.Shifts.FindAsync(queue.ShiftId);
+                // Se haya el paciente relacionado con el 'UsersId' del turno en cola:
+                var patient = await _context.Patients.FindAsync(shift.PatientId);
+                // Se haya el servicio relacionado con el 'ServiceId' del turno en cola:
+                var service = await _context.Services.FindAsync(shift.ServiceId);
+                // Se inicializa variable confirmando si el paciente está registrado?????????:
+                var isRegistered = await IsPatientRegistered();
                 // Se instancia un objeto del modelo 'Pacientqueue' para enviar la información a la vista:
                 var Pacientqueue = new Pacientqueue
                 {
@@ -95,52 +94,52 @@ namespace TurnosLaM.Controllers
                 {
                     IsRegistered = false
                 };
-
+                Console.WriteLine(Pacientqueue + "-------------------------------------- MODEL --------------------------------");
                 return View(Pacientqueue);
             }
         }
 
         // ------------------------------------------------------
-        // public async Task<IActionResult> IndexInProgress(int idPrueba)
-        // {
-        //     Console.WriteLine("------------------------------- ID --------------------------- " + idPrueba);
-        //     var queue = await _context.Queues.FindAsync(idPrueba);
-        //     var patient = await _context.Patients.FindAsync(queue.UserId);
-        //     var shift = await _context.Shifts.FindAsync(queue.ShiftId);
-        //     var service = await _context.Services.FindAsync(shift.ServiceId);
-        //     var isRegistered = await IsPatientRegistered();
+        public async Task<IActionResult> IndexInProgress(int idPrueba)
+        {
+            Console.WriteLine("------------------------------- ID --------------------------- " + idPrueba);
+            var queue = await _context.Queues.FindAsync(idPrueba);
+            var patient = await _context.Patients.FindAsync(queue.UserId);
+            var shift = await _context.Shifts.FindAsync(queue.ShiftId);
+            var service = await _context.Services.FindAsync(shift.ServiceId);
+            var isRegistered = await IsPatientRegistered();
 
-        //     if (queue != null && patient != null && service != null)
-        //     {
-        //         var Pacientqueue = new Pacientqueue
-        //         {
-        //             FirstName = patient.FirstName,
-        //             LastName = patient.LastName,
-        //             Document = patient.Document,
-        //             AssignedShift = queue.AssignedShift,
-        //             Calls = queue.Calls,
-        //             ServiceName = service.ServiceName,
-        //             Id = patient.Id,
-        //             Eps = patient.Eps,
-        //             IsRegistered = isRegistered,
-        //             Address = patient.Address,
-        //             PhoneNumber = patient.PhoneNumber,
-        //             Gender = patient.Gender,
-        //             QueueId = queue.Id
-        //             // Agregar la información sobre si el paciente está registrado
-        //         };
-        //         return View(Pacientqueue);
-        //     }
-        //     else
-        //     {
-        //         // Si el paciente no está registrado, establecer IsRegistered como false
-        //         var Pacientqueue = new Pacientqueue
-        //         {
-        //             IsRegistered = false
-        //         };
-        //         return View(Pacientqueue);
-        //     }
-        // }
+            if (queue != null && patient != null && service != null)
+            {
+                var Pacientqueue = new Pacientqueue
+                {
+                    FirstName = patient.FirstName,
+                    LastName = patient.LastName,
+                    Document = patient.Document,
+                    AssignedShift = queue.AssignedShift,
+                    Calls = queue.Calls,
+                    ServiceName = service.ServiceName,
+                    Id = patient.Id,
+                    Eps = patient.Eps,
+                    IsRegistered = isRegistered,
+                    Address = patient.Address,
+                    PhoneNumber = patient.PhoneNumber,
+                    Gender = patient.Gender,
+                    QueueId = queue.Id
+                    // Agregar la información sobre si el paciente está registrado
+                };
+                return View(Pacientqueue);
+            }
+            else
+            {
+                // Si el paciente no está registrado, establecer IsRegistered como false
+                var Pacientqueue = new Pacientqueue
+                {
+                    IsRegistered = false
+                };
+                return View(Pacientqueue);
+            }
+        }
         // ------------------------------------------------------
         private void changeStatus(Queue queue, string status)
         {

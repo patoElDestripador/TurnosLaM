@@ -65,19 +65,29 @@
     <div class="col-5 border shadow-sm" >
         <div class="row d-flex justify-content-center">
             <div class="col-12 d-flex justify-content-center">
+                @if(Model.Id == 0)
+                {
+                    
+                    <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="Index">Validar turno</a>
+                }
                 @if (Model != null)
                     {
                         @if (Model.Calls == 0)
                         {
-                            <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.Id">Primer Llamado</a>
-                            <a onclick="marcarSiguiente()" class="btn btn-primary mt-2 p-4">Siguiente paciente</a>
+                            <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Primer Llamado</a>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
                         }
                         else if (Model.Calls == 1)
                         {
-                            <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.Id">Segundo Llamado</a>
-                            <a onclick="marcarSiguiente()" class="btn btn-primary mt-2 p-4">Siguiente paciente</a>
+                            <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Segundo Llamado</a>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
                         }
                         else if (Model.Calls == 2)
+                        {
+                            <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Tercer llamado</a>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
+                        }
+                        else if (Model.Calls == 3)
                         {
                             <script>
                                 setTimeout(function() {
@@ -87,7 +97,7 @@
                                     }
                                 }, 20000);
                             </script>
-                            <a onclick="marcarSiguiente()" class="btn btn-primary mt-2 p-4">Siguiente paciente</a>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
                         }
                     }
             </div>
@@ -103,7 +113,7 @@
                             <option value="Break">Break</option>
                             <option value="Baño">Baño</option>
                         </select>
-                        <button class="btn  btn-success ms-4 rounded shadow-sm " type="button">Cambiar</button>
+                        <button class="btn  btn-success ms-4 rounded shadow-sm mt-4" type="button">Cambiar</button>
                     </div>
                 </form>
             </div>
