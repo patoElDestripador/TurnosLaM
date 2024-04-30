@@ -98,7 +98,6 @@ INSERT INTO Users (EmployeesId, UserName, Password, Role,Module, Status, Skills)
 (7, 'emmagarcia', 'password789', 'Asesor', 'A-08','LogIn', 'Pago de facturas,Información general'),
 (8, 'williamtaylor', 'password000', 'Asesor', 'A-09','LogOut', 'Solicitud de medicamentos,Pago de facturas,Autorización de medicamentos');
 
-
 INSERT INTO Patients (Document,FirstName, LastName, Gender, Address,PhoneNumber,Eps) VALUES
 ('100000001','Michael', 'Johnson', 'Hombre', '123 Main St', '333-333-585','Misery'),
 ('100000002','Emily', 'Davis', 'Mujer', '456 Elm St', '333-333-585','Misery'),
