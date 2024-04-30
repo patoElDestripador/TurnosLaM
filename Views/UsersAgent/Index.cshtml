@@ -94,6 +94,35 @@
                             <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
                         }
                     }
+                    else
+                    {
+                        @if (Model.Calls == 0)
+                        {
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Primer llamado</a>
+                        }
+                        else if (Model.Calls == 1)
+                        {
+                            <a class="btn btn-warning mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Segundo llamado</a>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
+                        }
+                        else if(Model.Calls == 2)
+                        {
+                            <a class="btn btn-danger mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Tercer llamado</a>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
+                        }
+                        else if (Model.Calls == 3)
+                        {
+                            <script>
+                                setTimeout(function() {
+                                    // Después de 20 segundos, si el estado sigue siendo "En espera", se marca como "Ausente"
+                                    if ('@Model.Status' === 'En espera') {
+                                        marcarAusente('@Model.QueueId');
+                                    }
+                                }, 20000);
+                            </script>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
+                        }
+                    }
             </div>
         </div>
         <div class="row d-flex justify-content-center mt-5">

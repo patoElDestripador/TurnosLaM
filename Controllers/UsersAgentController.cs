@@ -40,15 +40,18 @@ namespace TurnosLaM.Controllers
             // Condicional para evaluar si el usuario tiene 'llamados':
             if (idPrueba == null)
             {
+                Console.WriteLine("------------------------ PRUEBA 1 ------------------------");
                 /* Si no tiene llamados se hace la consulta original para hayar el turno en cola más antiguo del día actual */
                 // Consulta LINQ para obtener el turno más antiguo del día actual:
                 queue = await _context.Queues
                     .Where(q => q.Status == "En espera" && q.CreationDate.Date == fechaActual)
                     .OrderBy(q => q.CreationDate) // Ordena la hora de creación en orden ascendente
                     .FirstOrDefaultAsync();
+                Console.WriteLine(queue + "----------------------- TEST -----------------------------");
             }
             else
             {
+                Console.WriteLine("------------------------ PRUEBA 2 ------------------------");
                 // Si el asesor ha realizado llamados, se asigna el mismo paciente:
                 queue = await _context.Queues.FindAsync(idPrueba);
             }
