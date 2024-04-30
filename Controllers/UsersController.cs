@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using TurnosLaM.Models;
 using Microsoft.AspNetCore.Authentication;
 using TurnosLaM.Data;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace TurnosLaM.Controllers{
@@ -28,9 +29,16 @@ namespace TurnosLaM.Controllers{
     {
         return View();
     }
-    public IActionResult ShiftQueue()
+    public async Task<IActionResult> ShiftQueue()
     {
-        return View( _context.Queues.Where(q => q.Status == "En espera").OrderBy(q => q.CreationDate).Take(6).ToList());
+        var latestAssignedQueue = await _context.Queues
+            .Where(q => q.Status == "En progreso")
+            .OrderByDescending(q => q.AssignmentTime)
+            .FirstOrDefaultAsync();
+            if(latestAssignedQueue != null){
+                ViewData["LastShift"] = latestAssignedQueue.AssignedShift ;
+            }
+        return View(await _context.Queues.Where(q => q.Status == "En espera").OrderBy(q => q.CreationDate).Take(5).ToListAsync());
     }
 
 }

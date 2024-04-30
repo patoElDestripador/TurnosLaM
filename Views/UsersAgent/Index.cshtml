@@ -132,5 +132,29 @@
             document.getElementById("Gender").setAttribute("disabled",true)
         </script>
     }
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+@if (TempData["MessagePacient"] != null)
+{
+    <script>
+       
+        noPacients(@Html.Raw(Json.Serialize(TempData["MessagePacient"])));
+        function validatePacient() {
+            fetch('/UsersAgent/Index')
+                .then(response => {
+                })
+                .then(data => {
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('Error al recargar la página:', error);
+                });
+        }
+
+        setTimeout(validatePacient, 10000);
+    </script>
+}
 </div>
 

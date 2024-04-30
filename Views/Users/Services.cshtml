@@ -46,12 +46,7 @@
     <script src="sweetalert2/dist/sweetalert2.min.js"></script> 
     @* //Fin link *@
 }
-@if (TempData["shiftNotify"] != null)
-{
-    <script>
-        shiftNotifier(@Html.Raw(Json.Serialize(TempData["shiftNotify"])));
-    </script>
-}
+
 @if (TempData["documentNotFoundNotify"] != null)
 {
     <script>

@@ -11,7 +11,7 @@ using TurnosLaM.Helpers;
 
 namespace TurnosLaM.Controllers
 {
-    
+
     public class UsersAgentController : Controller
     {
         public readonly BaseContext _context;
@@ -22,7 +22,7 @@ namespace TurnosLaM.Controllers
         // ----------------- INCREMENT CALLS:
         public async Task<ActionResult> IncrementarCalls(int id)
         {
-            
+
             var pacient = await _context.Queues.FindAsync(id);
             if (pacient != null)
             {
@@ -30,7 +30,7 @@ namespace TurnosLaM.Controllers
                 _context.Update(pacient); // Guardar los cambios
                 await _context.SaveChangesAsync();
             }
-            return RedirectToAction("Index", new {idPrueba = id});
+            return RedirectToAction("Index", new { idPrueba = id });
         }
         // ----------------- INDEX ACTION:
         public async Task<IActionResult> Index(int? idPrueba = null)
@@ -85,6 +85,7 @@ namespace TurnosLaM.Controllers
                 // Se cambia el 'Status' del paciente:
                 changeStatus(queue, "En progreso");
                 // Se retorna la vista con la información del paciente:
+                TempData["MessageCall"] = queue.AssignedShift;
                 return View(Pacientqueue);
             }
             else
@@ -95,6 +96,7 @@ namespace TurnosLaM.Controllers
                     IsRegistered = false
                 };
                 Console.WriteLine(Pacientqueue + "-------------------------------------- MODEL --------------------------------");
+               TempData["MessagePacient"] = "No hay pacientes pendientes";
                 return View(Pacientqueue);
             }
         }
@@ -143,6 +145,11 @@ namespace TurnosLaM.Controllers
         // ------------------------------------------------------
         private void changeStatus(Queue queue, string status)
         {
+            if(status != "En progreso"){
+                queue.ClosingTime = DateTime.Now;
+            }else{
+                queue.AssignmentTime = DateTime.Now;
+            }
             queue.Status = status;
             _context.Queues.Update(queue);
             _context.SaveChanges();
@@ -151,7 +158,8 @@ namespace TurnosLaM.Controllers
         public async Task<ActionResult> nextPatient(int id)
         {
             var queue = await _context.Queues.FindAsync(id);
-            if(queue.Calls == 3)
+            TempData["MessageCall"] = queue.AssignedShift;
+            if (queue.Calls == 3)
             {
                 changeStatus(queue, "Ausente");
             }
@@ -191,66 +199,66 @@ namespace TurnosLaM.Controllers
             // Si el modelo no es válido, regresa a la vista con los errores
             return View(model);
         }
-        
 
 
 
-public async Task<IActionResult> Edit(int? id)
-{
-    if (id == null)
-    {
-        return NotFound();
-    }
 
-    var user = await _context.Users.FindAsync(id);
-    if (user == null)
-    {
-        return NotFound();
-    }
-
-    return View(user);
-}
-
-[HttpPost]
-public async Task<IActionResult> Edit(int id, User user)
-{
-    if (id != user.Id)
-    {
-        return NotFound();
-    }
-
-    if (ModelState.IsValid)
-    {
-        try
+        public async Task<IActionResult> Edit(int? id)
         {
-            // Busca el usuario en la base de datos y actualiza solo los campos necesarios
-            var existingUser = await _context.Users.FindAsync(id);
-            if (existingUser != null)
+            if (id == null)
             {
-                existingUser.Status = user.Status; // Actualiza el estado del usuario
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
+
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
         }
-        catch (DbUpdateConcurrencyException)
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, User user)
         {
-            throw;
+            if (id != user.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Busca el usuario en la base de datos y actualiza solo los campos necesarios
+                    var existingUser = await _context.Users.FindAsync(id);
+                    if (existingUser != null)
+                    {
+                        existingUser.Status = user.Status; // Actualiza el estado del usuario
+                        await _context.SaveChangesAsync();
+                    }
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(user);
         }
-        return RedirectToAction(nameof(Index));
-    }
-    return View(user);
-}
-
-
-}
-
-
-            
-
-
-
 
 
     }
+
+
+
+
+
+
+
+
+}
 
 
 

@@ -117,7 +117,7 @@ namespace TurnosLaM.Controllers
                 //listar turnos en turnero
             }
 
-            return RedirectToAction("Document", "Users");
+            return RedirectToAction("Index", "Users");
         }
         
         public async Task<string> GenerateShift(string Service)

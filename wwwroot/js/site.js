@@ -6,34 +6,33 @@
 
 
 function hola() {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success"
-          });
-        }
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success"
       });
+    }
+  });
 
 }
-//Funcion de boton Continuar
 function shiftNotifier(ShiftNumber) {
   Swal.fire({
     title: `Turno ${ShiftNumber}`,
     text: "¡Turno asignado. En breve un asesor te llamará!",
-    icon: "success"
+    icon: "success",
+    timer: 5000
   });
 }
-//Fin de Boton de continuar
 
 function documentNotFound(Document) {
   const swalWithBootstrapButtons = Swal.mixin({
@@ -45,7 +44,7 @@ function documentNotFound(Document) {
   });
 
   swalWithBootstrapButtons.fire({
-    title:`¿Deseas continuar de todas formas?`,
+    title: `¿Deseas continuar de todas formas?`,
     text: `No econtramos el documento con numero ${Document}`,
     icon: "warning",
     showCancelButton: true,
@@ -54,13 +53,10 @@ function documentNotFound(Document) {
     reverseButtons: true
   }).then((result) => {
     if (result.isConfirmed) {
-        //generar el turno
-        window.location.href = "/Users/Services";
-      }
+      window.location.href = "/Users/Services";
+    }
   });
-
 }
-
 
 function notificationToMissionController(message) {
   Swal.fire({
@@ -69,33 +65,26 @@ function notificationToMissionController(message) {
     title: `${message}`,
     showConfirmButton: false,
     timer: 1000
-  }); 
+  });
 }
 
-//esta funcion solo sirve en una direccion 
-//si requieren una respuesta...
-//consiguren la de uds 
-function sendRequestToController(Controller,method,methodType = "GET") {
-  var xhr = new XMLHttpRequest();
-  xhr.open(methodType, `/${Controller}/${method}`, true);
-  xhr.onload = () => {
-      if (xhr.status >= 200 && xhr.status < 300) {
-          console.log(xhr.responseText);
-      } else {
-          console.error(xhr.statusText);
-      }
-  };
-  xhr.send();
-}
-
-
-nexTurn
-function notificationToMissionController(message) {
+function notificationShift(message) {
   Swal.fire({
-    position: "top-end",
-    icon: "warning",
-    title: `${message}`,
+    position: "Center",
+    icon: "info",
+    title: `Turno : ${message}
+    Modulo : 2`,
     showConfirmButton: false,
-    timer: 1000
-  }); 
+    timer: 5000
+  });
+}
+
+function noPacients(params) {
+  Swal.fire({
+    position: "Center",
+    icon: "info",
+    title: `${params}`,
+    showConfirmButton: false,
+    timer: 2000
+  });
 }
