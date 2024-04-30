@@ -9,6 +9,7 @@ namespace TurnosLaM.Models
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        public int EmployeesId { get; set; }
         public int ShiftId { get; set; }
         public string? Status { get; set; }
         public string? AssignedShift { get; set; }
@@ -25,6 +26,7 @@ namespace TurnosLaM.Models
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Gender { get; set; }
+        
         
     }
 }
