@@ -65,19 +65,29 @@
     <div class="col-5 border shadow-sm" >
         <div class="row d-flex justify-content-center">
             <div class="col-12 d-flex justify-content-center">
+                @if(Model.Id == 0)
+                {
+                    
+                    <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="Index">Validar turno</a>
+                }
                 @if (Model != null)
                     {
                         @if (Model.Calls == 0)
                         {
-                            <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.Id">Primer Llamado</a>
-                            <a onclick="marcarSiguiente()" class="btn btn-primary mt-2 p-4">Siguiente paciente</a>
+                            <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Primer Llamado</a>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
                         }
                         else if (Model.Calls == 1)
                         {
-                            <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.Id">Segundo Llamado</a>
-                            <a onclick="marcarSiguiente()" class="btn btn-primary mt-2 p-4">Siguiente paciente</a>
+                            <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Segundo Llamado</a>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
                         }
                         else if (Model.Calls == 2)
+                        {
+                            <a onclick="marcarLlamado('@Model.Id')" class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="IncrementarCalls" asp-route-id="@Model.QueueId">Tercer llamado</a>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
+                        }
+                        else if (Model.Calls == 3)
                         {
                             <script>
                                 setTimeout(function() {
@@ -87,23 +97,23 @@
                                     }
                                 }, 20000);
                             </script>
-                            <a onclick="marcarSiguiente()" class="btn btn-primary mt-2 p-4">Siguiente paciente</a>
+                            <a class="btn btn-primary mt-2 p-4" asp-controller="UsersAgent" asp-action="nextPatient" asp-route-id="@Model.QueueId">Siguiente paciente</a>
                         }
                     }
             </div>
         </div>
-            <div class="row d-flex justify-content-center mt-5">
-                <form asp-action="Edit" asp-controller="UsersAgent" asp-route-id="@Model.Id" method="post">
-                    <div class="row d-flex justify-content-center mt-5">
-                        <div class="col-8">
-                            <select class="form-select" aria-label="Default select example" asp-for="Status">
-                                <option value="" selected disabled>Estado</option>
-                                <option value="Activo">Activo</option>
-                                <option value="Inactivo">Inactivo</option>
-                                <option value="Break">Break</option>
-                                <option value="Baño">Baño</option>
-                            </select>
-                        </div>
+        <div class="row d-flex justify-content-center mt-5">
+            <form class="text-center" method="post">
+                <div class="row d-flex justify-content-center mt-5">
+                    <div class="col-8">
+                        <select class="form-select">
+                            <option value="" selected disabled>Estado</option>
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                            <option value="Break">Break</option>
+                            <option value="Baño">Baño</option>
+                        </select>
+                        <button class="btn  btn-success ms-4 rounded shadow-sm mt-4" type="button">Cambiar</button>
                     </div>
                     <button type="submit" class="btn btn-success" style="margin-top: 115px;">Confirmar</button>
                 </form>
