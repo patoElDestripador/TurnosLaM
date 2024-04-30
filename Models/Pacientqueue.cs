@@ -5,6 +5,7 @@ namespace TurnosLaM.Models
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        public int EmployeesId { get; set; }
         public int ShiftId { get; set; }
         public string? Status { get; set; }
         public string? AssignedShift { get; set; }

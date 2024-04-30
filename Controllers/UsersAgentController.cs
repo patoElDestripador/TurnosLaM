@@ -192,5 +192,67 @@ namespace TurnosLaM.Controllers
             // Si el modelo no es válido, regresa a la vista con los errores
             return View(model);
         }
+        
+
+
+
+public async Task<IActionResult> Edit(int? id)
+{
+    if (id == null)
+    {
+        return NotFound();
     }
+
+    var user = await _context.Users.FindAsync(id);
+    if (user == null)
+    {
+        return NotFound();
+    }
+
+    return View(user);
 }
+
+[HttpPost]
+public async Task<IActionResult> Edit(int id, User user)
+{
+    if (id != user.Id)
+    {
+        return NotFound();
+    }
+
+    if (ModelState.IsValid)
+    {
+        try
+        {
+            // Busca el usuario en la base de datos y actualiza solo los campos necesarios
+            var existingUser = await _context.Users.FindAsync(id);
+            if (existingUser != null)
+            {
+                existingUser.Status = user.Status; // Actualiza el estado del usuario
+                await _context.SaveChangesAsync();
+            }
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            throw;
+        }
+        return RedirectToAction(nameof(Index));
+    }
+    return View(user);
+}
+
+
+}
+
+
+            
+
+
+
+
+
+    }
+
+
+
+
