@@ -22,7 +22,9 @@ namespace TurnosLaM.Controllers
         // ----------------- INCREMENT CALLS:
         public async Task<ActionResult> IncrementarCalls(int id)
         {
+            //funcion que llame a el turno 
             var pacient = await _context.Queues.FindAsync(id);
+            TempData["MessageCall"] = $"${pacient.AssignedShift}";
             if (pacient != null)
             {
                 pacient.Calls = pacient.Calls + 1;

@@ -52,3 +52,9 @@
         shiftNotifier(@Html.Raw(Json.Serialize(TempData["shiftNotify"])));
     </script>
 }
+@if (TempData["documentNotFoundNotify"] != null)
+{
+    <script>
+        documentNotFound(@Html.Raw(Json.Serialize(TempData["documentNotFoundNotify"])));
+    </script>
+}
